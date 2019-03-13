@@ -11,16 +11,28 @@ npm install react-bootstrap bootstrap
 
 ### Caesar Shift Functions
 ~~- Shift to specifications~~
-- Get all shifts
+~~- Get all shifts~~
 ~~- Retrieve user input~~
-- Display shift or shifts.
+~~- Display shift or shifts.~~
 
 ##### Others
-- Limit input for how to shift
-- Give options to encrypt or decrypt. (Could just display all shifts, will likely do this.)
-- Display shifts as text is given.
+- Limit input for how to shift!!!
+~~- Give options to encrypt or decrypt. (Could just display all shifts, will likely do this.)~~
+~~- Display shifts as text is given.~~
 
 ### Monoalphabetic Functions
+-
+-
+-
+-
+
+### Vigenere Functions
+-
+-
+-
+-
+
+### Playfair Functions
 -
 -
 -
