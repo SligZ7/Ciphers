@@ -7,11 +7,6 @@ import Vigenere from "./Vigenere"
 import Playfair from "./Playfair"
 
 class Navbar extends Component{
-  constructor() {
-    super();
-    //this.state = { activetab:["Caesar"]}
-  }
-
   render() {
     return (
       <div className="Navbar">

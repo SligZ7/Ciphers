@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Table from 'react-bootstrap/Table'
 
 
 class Shifts extends Component{
   render() {
     return (
-      <Table responsive="sm">
+      <Table responsive="sm" size="sm">
         <thead>
           <tr>
             <th>Shifted by</th>
