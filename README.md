@@ -24,9 +24,9 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 ~~- Display shifts as text is given.~~
 
 ### Monoalphabetic Functions
-- Retrieve user input
+~~- Retrieve user input~~
 
-- Ask for keyword (works same for both encrypting and decrypting)
+~~- Ask for keyword (works same for both encrypting and decrypting)~~
 
 - Replace given text with new alphabet constructed from keyword
 

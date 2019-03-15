@@ -37,10 +37,10 @@ class Caesar extends Component{
       if(pos > -1){ // If character not in alphabet, do not change.
         pos+= shift_num;
         if (pos > 25) pos = pos - 26;
-        shift = shift.concat(alpha.charAt(pos));
+        shift += alpha.charAt(pos);
       }
       else{
-        shift = shift.concat(str.charAt(i));
+        shift += str.charAt(i);
       }
     }
     return shift;
@@ -49,11 +49,15 @@ class Caesar extends Component{
   render() {
     return (
       <Container>
+        <h1 className="center">Caesar Shift Cipher</h1>
         <Form.Group controlId="caesar-input">
-          <Form.Label/>
-          <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Insert Text"/>
+          <Form.Label>Enter text to see shifts:</Form.Label>
+          <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Enter Text"/>
+          <Form.Text className="text-muted">
+            Any characters that are not alphabetical will be ignored!
+          </Form.Text>
         </Form.Group>
-        <h1>Shifts</h1>
+        <h2 className="center">Shifts</h2>
         <div id="caesar-output"/>
       </Container>
     );
