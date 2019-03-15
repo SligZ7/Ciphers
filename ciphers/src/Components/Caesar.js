@@ -10,7 +10,6 @@ class Caesar extends Component{
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.caesar_shift = this.caesar_shift.bind(this);
     this.get_shifts = this.get_shifts.bind(this);
   }
 
@@ -24,27 +23,9 @@ class Caesar extends Component{
   get_shifts(input){
     var shifts = [];
     for(var i=1; i<26; i++){
-      shifts.push(this.caesar_shift(input, i));
+      shifts.push(shift(input, i));
     }
     return shifts;
-  }
-
-  caesar_shift(str, shift_num){
-    str = str.toLowerCase();
-    var alpha = "abcdefghijklmnopqrstuvwxyz";
-    var shift = "";
-    for(var i=0; i<str.length; i++){
-      var pos = alpha.indexOf(str.charAt(i));
-      if(pos > -1){ // If character not in alphabet, do not change.
-        pos+= shift_num;
-        if (pos > 25) pos = pos - 26;
-        shift += alpha.charAt(pos);
-      }
-      else{
-        shift += str.charAt(i);
-      }
-    }
-    return shift;
   }
 
   render() {
@@ -71,4 +52,23 @@ class Caesar extends Component{
   }
 }
 
+function shift(str, shift_num){
+  str = str.toLowerCase();
+  var alpha = "abcdefghijklmnopqrstuvwxyz";
+  var shift = "";
+  for(var i=0; i<str.length; i++){
+    var pos = alpha.indexOf(str.charAt(i));
+    if(pos > -1){ // If character not in alphabet, do not change.
+      pos+= shift_num;
+      if (pos > 25) pos = pos - 26;
+      shift += alpha.charAt(pos);
+    }
+    else{
+      shift += str.charAt(i);
+    }
+  }
+  return shift;
+}
+
 export default Caesar;
+export {shift};

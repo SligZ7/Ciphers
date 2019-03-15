@@ -71,6 +71,3 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 - provide working box with ease to move letters around
 
 - on the fly letter replacement to see changes
-
-### Other Issues(Bugs)
-~~- Redesign how to show shifts. If there is too much text table reacts strangely.~~
