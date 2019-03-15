@@ -44,12 +44,8 @@ class Monoalpha extends Component{
           }
           i++;
         }
-        console.log(new_alpha);
         if(new_alpha.length < 26) new_alpha += reg_alpha; //Fill rest of new alphabet with remaining letters.
-
-        console.log(new_alpha);
       }
-      console.log(new_alpha);
       return new_alpha;
   }
 
@@ -57,12 +53,8 @@ class Monoalpha extends Component{
     var reg_alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var new_alpha = this.get_new_alphabet(keyword);
     text = text.toUpperCase();
-    console.log(keyword);
-    console.log(reg_alpha);
-    console.log(new_alpha);
-    console.log(text);
-    for(var i=0; i<new_alpha.length; i++){
-      text = text.replace(reg_alpha.charAt(i), new_alpha.charAt(i));
+    for(var i=0; i<text.length; i++){
+      text = text.replace(text.charAt(i), new_alpha.charAt(reg_alpha.indexOf(text.charAt(i))));
     }
     return text;
   }
