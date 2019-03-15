@@ -32,28 +32,39 @@ class Vigenere extends Component{
   }
 
   get_new_alphabets(keyword){
-    var letters = keyword.toLowerCase().match(/[a-z]/g); //ignore any other characters beside a-z.
-    var reg_alpha = "abcdefghijklmnopqrstuvwxyz";
-    var new_alphabets = [];
+    var letters = keyword.toUpperCase().match(/[A-Z]/g); //ignore any other characters beside a-z.
+    var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var new_alphas = [];
     if(letters){
       for(var i=0; i<letters.length; i++){
-        new_alphabets.push(shift(reg_alpha, reg_alpha.indexOf(letters[i])));
+        new_alphas.push(shift(alpha, alpha.indexOf(letters[i])));
       }
     }
-    console.log(new_alphabets);
-    return new_alphabets;
+    return new_alphas;
   }
 
-  vigenere_cipher(keyword, text){
-    var reg_alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  vigenere_cipher(keyword, text, encrypt=true){
     var new_alphas = this.get_new_alphabets(keyword);
-    text = text.toUpperCase();
+    var reg_alpha = "abcdefghijklmnopqrstuvwxyz";
+    var i;
     var pos = 0;
-    for(var i=0; i<text.length; i++){
-      text = text.replace(text.charAt(i), new_alphas[pos].charAt(reg_alpha.indexOf(text.charAt(i))));
-      ((pos + 1) < new_alphas.length) ? pos++ : pos = 0;
+    if(new_alphas){
+      if(encrypt){
+        text = text.tolowerCase();
+        for(i=0; i<text.length; i++){
+          text = text.replace(text.charAt(i), new_alphas[pos].charAt(reg_alpha.indexOf(text.charAt(i))));
+          ((pos + 1) < new_alphas.length) ? pos++ : pos = 0;
+        }
+      }
+      else{
+        text = text.toUpperCase();
+        for(i=0; i<text.length; i++){
+          text = text.replace(text.charAt(i), reg_alpha.charAt(new_alphas[pos].indexOf(text.charAt(i))));
+          ((pos + 1) < new_alphas.length) ? pos++ : pos = 0;
+        }
+      }
+      return text;
     }
-    return text;
   }
 
   render() {

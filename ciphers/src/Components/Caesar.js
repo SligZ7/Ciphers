@@ -53,8 +53,8 @@ class Caesar extends Component{
 }
 
 function shift(str, shift_num){
-  str = str.toLowerCase();
-  var alpha = "abcdefghijklmnopqrstuvwxyz";
+  str = str.toUpperCase();
+  var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var shift = "";
   for(var i=0; i<str.length; i++){
     var pos = alpha.indexOf(str.charAt(i));

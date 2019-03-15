@@ -47,7 +47,7 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 
 - Add button to toggle encrypting and decrypting
 
-~~- Replace given text with the different alphabets constructed from  the keyword~~ (Also go backwards to decrypt)
+~~- Replace given text with the different alphabets constructed from  the keyword~~ ~~(Also go backwards to decrypt)~~
 
 
 ###### Extra (Provide tools to assist cryptanalysis)
