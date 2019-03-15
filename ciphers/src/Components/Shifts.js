@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table'
+import Form from 'react-bootstrap/Form'
 
 
 class Shifts extends Component{
   render() {
     return (
-      <Table responsive="sm" size="sm">
+      <Table responsive="md" size="xl" className="center">
         <thead>
           <tr>
             <th>Shifted by</th>
@@ -25,7 +26,7 @@ function display_shifts(shifts){
     return(
       <tr>
         <td>{index + 1}</td>
-        <td>{shift}</td>
+        <td><Form.Control as="textarea" rows="2" readOnly="true" value={shift}/></td>
       </tr>
   );
   });

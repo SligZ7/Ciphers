@@ -49,15 +49,17 @@ class Caesar extends Component{
 
   render() {
     return (
-      <Container>
-        <h1 className="center">Caesar Shift Cipher</h1>
-        <Form.Group controlId="caesar-input">
-          <Form.Label>Enter text to see shifts:</Form.Label>
-          <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Enter Text"/>
-          <Form.Text className="text-muted">
-            Any characters that are not alphabetical will be ignored!
-          </Form.Text>
-        </Form.Group>
+      <Container fluid="true">
+        <Container>
+          <h1 className="center">Caesar Shift Cipher</h1>
+          <Form.Group controlId="caesar-input">
+            <Form.Label>Enter text to see shifts:</Form.Label>
+            <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Enter Text"/>
+            <Form.Text className="text-muted">
+              Any characters that are not alphabetical will be ignored!
+            </Form.Text>
+          </Form.Group>
+        </Container>
         <Jumbotron>
           <h2 className="center">Shifts</h2>
           <div id="caesar-output">
