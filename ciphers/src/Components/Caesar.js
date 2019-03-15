@@ -70,5 +70,5 @@ function shift(str, shift_num){
   return shift;
 }
 
-export default Caesar;
 export {shift};
+export default Caesar;

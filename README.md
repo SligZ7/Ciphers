@@ -41,11 +41,14 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 
 
 ### Vigenere Functions
-- Retrieve user input
+~~- Retrieve user input~~
 
-- Ask for keyword (works same for both encrypting and decrypting)
+~~- Ask for keyword~~
 
-- Replace given text with the different alphabets constructed from  the keyword
+- Add button to toggle encrypting and decrypting
+
+~~- Replace given text with the different alphabets constructed from  the keyword~~ (Also go backwards to decrypt)
+
 
 ###### Extra (Provide tools to assist cryptanalysis)
 - counting the repetitions of letter sequences and spaces between them

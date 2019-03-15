@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import shift from './Caesar'
+import {shift} from './Caesar'
 
 class Vigenere extends Component{
   constructor(props){
@@ -37,19 +37,21 @@ class Vigenere extends Component{
     var new_alphabets = [];
     if(letters){
       for(var i=0; i<letters.length; i++){
-        new_alphabets.push(reg_alpha, reg_alpha.indexOf(letters[i]));
+        new_alphabets.push(shift(reg_alpha, reg_alpha.indexOf(letters[i])));
       }
     }
+    console.log(new_alphabets);
     return new_alphabets;
   }
 
   vigenere_cipher(keyword, text){
     var reg_alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var new_alpha = this.get_new_alphabet(keyword);
+    var new_alphas = this.get_new_alphabets(keyword);
     text = text.toUpperCase();
     var pos = 0;
     for(var i=0; i<text.length; i++){
-      text = text.replace(text.charAt(i), new_alpha.charAt(reg_alpha.indexOf(text.charAt(i))));
+      text = text.replace(text.charAt(i), new_alphas[pos].charAt(reg_alpha.indexOf(text.charAt(i))));
+      ((pos + 1) < new_alphas.length) ? pos++ : pos = 0;
     }
     return text;
   }
