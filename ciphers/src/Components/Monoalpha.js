@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 class Monoalpha extends Component{
   constructor(props){
@@ -9,13 +10,24 @@ class Monoalpha extends Component{
 
     this.handleChange = this.handleChange.bind(this);
     this.get_new_alphabet = this.get_new_alphabet.bind(this);
+    this.monoalphabetic_cipher = this.monoalphabetic_cipher.bind(this);
   }
 
   handleChange(event){
-    //ReactDOM.render(
-      //<Shifts shifts={this.(event.target.value)}/>, //NEED TO CHANGE
-      //document.getElementById('monoalpha-output')
-    //);
+    var input = document.getElementById("monoalpha-input").value;
+    var keyword = document.getElementById("monoalpha-keyword").value;
+    if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
+      ReactDOM.render(
+        <p>{this.monoalphabetic_cipher(keyword,input)}</p>,
+        document.getElementById('monoalpha-output')
+      );
+    }
+    else{
+      ReactDOM.render(
+        <p/>,
+        document.getElementById('monoalpha-output')
+      );
+    }
   }
 
   get_new_alphabet(keyword){
@@ -24,17 +36,35 @@ class Monoalpha extends Component{
       var new_alpha = "";
       var i = 0;
 
-      if(!letters){
-        while (i < letters.length && new_alpha.length != 26) {
+      if(letters){
+        while (i < letters.length && new_alpha.length !== 26) {
           if(new_alpha.indexOf(letters[i]) < 0) {
             new_alpha += letters[i];
-            reg_alpha.replace(letters[i], "");
+            reg_alpha = reg_alpha.replace(letters[i], "");
           }
           i++;
         }
+        console.log(new_alpha);
         if(new_alpha.length < 26) new_alpha += reg_alpha; //Fill rest of new alphabet with remaining letters.
+
+        console.log(new_alpha);
       }
+      console.log(new_alpha);
       return new_alpha;
+  }
+
+  monoalphabetic_cipher(keyword, text){
+    var reg_alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var new_alpha = this.get_new_alphabet(keyword);
+    text = text.toUpperCase();
+    console.log(keyword);
+    console.log(reg_alpha);
+    console.log(new_alpha);
+    console.log(text);
+    for(var i=0; i<new_alpha.length; i++){
+      text = text.replace(reg_alpha.charAt(i), new_alpha.charAt(i));
+    }
+    return text;
   }
 
   render() {
@@ -44,7 +74,7 @@ class Monoalpha extends Component{
         <Form>
           <Form.Group controlId="monoalpha-keyword">
             <Form.Label>Keyword:</Form.Label>
-            <Form.Control type="email" placeholder="Enter keyword" />
+            <Form.Control type="keyword" onChange={this.handleChange} placeholder="Enter keyword"/>
             <Form.Text className="text-muted">
               Keyword is needed!
             </Form.Text>
@@ -57,8 +87,10 @@ class Monoalpha extends Component{
             </Form.Text>
           </Form.Group>
         </Form>
-
-        <div id="monoalpha-output"/>
+        <Jumbotron>
+          <h2 className="center">Output</h2>
+          <div id="monoalpha-output"/>
+        </Jumbotron>
       </Container>
     );
   }

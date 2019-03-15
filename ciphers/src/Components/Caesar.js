@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Shifts from './Shifts'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 class Caesar extends Component{
   constructor(props){
@@ -57,8 +58,12 @@ class Caesar extends Component{
             Any characters that are not alphabetical will be ignored!
           </Form.Text>
         </Form.Group>
-        <h2 className="center">Shifts</h2>
-        <div id="caesar-output"/>
+        <Jumbotron>
+          <h2 className="center">Shifts</h2>
+          <div id="caesar-output">
+            <Shifts shifts={this.get_shifts("")}/>
+          </div>
+        </Jumbotron>
       </Container>
     );
   }
