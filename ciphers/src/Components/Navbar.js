@@ -9,7 +9,7 @@ import Playfair from "./Playfair"
 class Navbar extends Component{
   render() {
     return (
-      <div className="Navbar">
+      <div>
         <Tabs defaultActiveKey="caesar" id="tab">
           <Tab eventKey="caesar" title="Caesar">
             <Caesar />

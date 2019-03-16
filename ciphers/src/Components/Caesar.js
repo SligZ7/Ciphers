@@ -37,7 +37,7 @@ class Caesar extends Component{
             <Form.Label>Enter text to see shifts:</Form.Label>
             <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Enter Text"/>
             <Form.Text className="text-muted">
-              Any characters that are not alphabetical will be ignored!
+              Any characters that are not alphabetical will be ignored and unchanged!
             </Form.Text>
           </Form.Group>
         </Container>
