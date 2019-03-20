@@ -45,7 +45,7 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 
 ~~- Ask for keyword~~
 
-- Add button to toggle encrypting and decrypting
+~~- Add button to toggle encrypting and decrypting~~
 
 ~~- Replace given text with the different alphabets constructed from  the keyword~~ ~~(Also go backwards to decrypt)~~
 
@@ -60,9 +60,9 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 - on the fly letter replacement to see changes
 
 ### Playfair Functions
-- Retrieve user input
+~~- Retrieve user input~~
 
-- Ask for keyword (works same for both encrypting and decrypting)
+~~- Ask for keyword (works same for both encrypting and decrypting(go backwards when decrypting, but square is the same))~~
 
 - Replace given text with the box constructed from  the keyword
 
@@ -74,3 +74,8 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 - provide working box with ease to move letters around
 
 - on the fly letter replacement to see changes
+
+### Other Issues
+- Rework buttons to switch modes
+
+- Separate components into smaller components
