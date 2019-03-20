@@ -9,7 +9,6 @@ class Monoalpha extends Component{
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.get_new_alphabet = this.get_new_alphabet.bind(this);
     this.monoalphabetic_cipher = this.monoalphabetic_cipher.bind(this);
   }
 
@@ -30,28 +29,9 @@ class Monoalpha extends Component{
     }
   }
 
-  get_new_alphabet(keyword){
-      var letters = keyword.toLowerCase().match(/[a-z]/g); //ignore any other characters beside a-z.
-      var reg_alpha = "abcdefghijklmnopqrstuvwxyz";
-      var new_alpha = "";
-      var i = 0;
-
-      if(letters){
-        while (i < letters.length && new_alpha.length !== 26) {
-          if(new_alpha.indexOf(letters[i]) < 0) {
-            new_alpha += letters[i];
-            reg_alpha = reg_alpha.replace(letters[i], "");
-          }
-          i++;
-        }
-        if(new_alpha.length < 26) new_alpha += reg_alpha; //Fill rest of new alphabet with remaining letters.
-      }
-      return new_alpha;
-  }
-
   monoalphabetic_cipher(keyword, text){
     var reg_alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var new_alpha = this.get_new_alphabet(keyword);
+    var new_alpha = get_new_alphabet(keyword);
     text = text.toUpperCase();
     for(var i=0; i<text.length; i++){
       text = text.replace(text.charAt(i), new_alpha.charAt(reg_alpha.indexOf(text.charAt(i))));
@@ -88,4 +68,24 @@ class Monoalpha extends Component{
   }
 }
 
+function get_new_alphabet(keyword){
+    var letters = keyword.toLowerCase().match(/[a-z]/g); //ignore any other characters beside a-z.
+    var reg_alpha = "abcdefghijklmnopqrstuvwxyz";
+    var new_alpha = "";
+    var i = 0;
+
+    if(letters){
+      while (i < letters.length && new_alpha.length !== 26) {
+        if(new_alpha.indexOf(letters[i]) < 0) {
+          new_alpha += letters[i];
+          reg_alpha = reg_alpha.replace(letters[i], "");
+        }
+        i++;
+      }
+      if(new_alpha.length < 26) new_alpha += reg_alpha; //Fill rest of new alphabet with remaining letters.
+    }
+    return new_alpha;
+}
+
+export {get_new_alphabet};
 export default Monoalpha;

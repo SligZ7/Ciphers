@@ -15,9 +15,13 @@ class PlayfairSquare extends Component{
 
   render() {
     return (
-      <Table responsive="sm" size="sm" className="center">
+      <Table responsive="sm" size="sm" className="center" striped bordered>
         <tbody>
-          {fill_in_table(this.props.keyword)}
+          {create_table_row(this.props.square, 0, this.props.read_only)}
+          {create_table_row(this.props.square, 1, this.props.read_only)}
+          {create_table_row(this.props.square, 2, this.props.read_only)}
+          {create_table_row(this.props.square, 3, this.props.read_only)}
+          {create_table_row(this.props.square, 4, this.props.read_only)}
         </tbody>
       </Table>
       );
@@ -25,28 +29,20 @@ class PlayfairSquare extends Component{
 }
 
 //Expect letters to be a string. Could modify to work with array
-function fill_in_table(letters){
-  if(letters){
-    var rows = [];
-    for(var i=0; i<letters.length; i+=5){
-      rows.push(letters.substring(i, i+5));
-    }
-    return rows.map(create_table_row);
-  }
-  else{
-    //Sqaure of ? maybe
-  }
+function fill_in_table(square){
+  var table;
+
 }
 
 // Helper Function for fill_in_table
-function create_table_row(row, index){
+function create_table_row(square, row, read_only){
   return(
-    <tr key={"playfair-" + index}>
-      <td>{row.charAt(0)}</td>
-      <td>{row.charAt(1)}</td>
-      <td>{row.charAt(2)}</td>
-      <td>{row.charAt(3)}</td>
-      <td>{row.charAt(4)}</td>
+    <tr key={"playfair-" + row}>
+      <td><Form.Control as="input" rows="1" size="sm" plaintext={read_only} value={square[row][0]}/></td>
+      <td><Form.Control as="input" rows="1" size="sm" plaintext={read_only} value={square[row][1]}/></td>
+      <td><Form.Control as="input" rows="1" size="sm" plaintext={read_only} value={square[row][2]}/></td>
+      <td><Form.Control as="input" rows="1" size="sm" plaintext={read_only} value={square[row][3]}/></td>
+      <td><Form.Control as="input" rows="1" size="sm" plaintext={read_only} value={square[row][4]}/></td>
     </tr>
   );
 }

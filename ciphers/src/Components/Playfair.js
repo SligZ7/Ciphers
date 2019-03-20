@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import PlayfairSquare from './PlayfairSquare'
+import {get_new_alphabet} from './Monoalpha'
 
 class Playfair extends Component{
   constructor(props){
@@ -12,22 +13,23 @@ class Playfair extends Component{
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.create_square = this.create_square.bind(this);
     this.playfair_cipher = this.playfair_cipher.bind(this);
 
     this.state = {mode: 0};
   }
 
-  handleChange(e, mode_change=false){
+  handleChange(e, mode_change){
     var input = document.getElementById("playfair-input").value;
     var keyword = document.getElementById("playfair-keyword").value;
     var mode = this.state.mode;
     if(mode_change) {
       (mode === 0) ? mode = 1 : mode = 0;
     }
-    
+
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
-        <PlayfairSquare keyword="abcdefghiklmnopqrstuvwxyz"/>,//<p>{this.playfair_cipher(keyword,input,mode)}</p>,
+        <PlayfairSquare square={this.create_square(keyword)} read_only={true}/>,//<p>{this.playfair_cipher(keyword,input,mode)}</p>,
         document.getElementById('playfair-output')
       );
     }
@@ -41,14 +43,29 @@ class Playfair extends Component{
 
   handleClick(e){
     (this.state.mode === 0) ? this.setState({mode: 1}) : this.setState({mode: 0});
-    this.handleChange(e, true)
+    this.handleChange(e, true);
   }
 
 
   //Mode indicates whether to encrypt or decrypt.
   //  0: Encrypt, 1:Decrypt
   playfair_cipher(keyword, text, mode=0){
-    return
+
+  }
+
+  create_square(keyword, letter_to_replace="j"){
+    var i       // the first-order index in square
+      , j       // the second order index in square
+      , square = [];
+    keyword = get_new_alphabet(keyword).replace(letter_to_replace, ""); // Still needs to replace letter with intended replacement when encrypting
+    for(i=0; i<5;i++){
+      square[i] = [];
+      for(j=0; j<5;j++){
+        square[i][j] = keyword.charAt(i * 5 + j);
+      }
+    }
+    console.log(square);
+    return square;
   }
 
   render() {

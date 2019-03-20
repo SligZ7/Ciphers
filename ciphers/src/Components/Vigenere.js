@@ -18,7 +18,7 @@ class Vigenere extends Component{
     this.state = {mode: 0};
   }
 
-  handleChange(e, mode_change=false){
+  handleChange(e, mode_change){
     var input = document.getElementById("vigenere-input").value;
     var keyword = document.getElementById("vigenere-keyword").value;
     var mode = this.state.mode;
@@ -64,7 +64,7 @@ class Vigenere extends Component{
     var i;
     var pos = 0;
     if(new_alphas){
-      if(mode){
+      if(mode === 0){
         text = text.toLowerCase();
         for(i=0; i<text.length; i++){
           text = text.replace(text.charAt(i), new_alphas[pos].charAt(reg_alpha.indexOf(text.charAt(i))));
