@@ -84,6 +84,9 @@ function get_new_alphabet(keyword){
       }
       if(new_alpha.length < 26) new_alpha += reg_alpha; //Fill rest of new alphabet with remaining letters.
     }
+    else{
+      new_alpha = reg_alpha;
+    }
     return new_alpha;
 }
 

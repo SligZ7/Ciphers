@@ -15,7 +15,6 @@ class PlayfairSquare extends Component{
 
   render() {
     return (
-
       <Table responsive="sm" size="sm" striped bordered className="playfair-square">
         <tbody>
           {create_table_row(this.props.square, 0, this.props.read_only)}
@@ -33,11 +32,11 @@ class PlayfairSquare extends Component{
 function create_table_row(square, row, read_only){
   return(
     <tr key={"playfair-" + row}>
-      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} value={square[row][0]}/></td>
-      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} value={square[row][1]}/></td>
-      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} value={square[row][2]}/></td>
-      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} value={square[row][3]}/></td>
-      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} value={square[row][4]}/></td>
+      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} readOnly={read_only} value={square[row][0]}/></td>
+      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} readOnly={read_only} value={square[row][1]}/></td>
+      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} readOnly={read_only} value={square[row][2]}/></td>
+      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} readOnly={read_only} value={square[row][3]}/></td>
+      <td><Form.Control as="input" size="sm" className="center" plaintext={read_only} readOnly={read_only} value={square[row][4]}/></td>
     </tr>
   );
 }

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
@@ -15,10 +13,12 @@ class Playfair extends Component{
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.keywordChange = this.keywordChange.bind(this);
+    this.get_keyword = this.get_keyword.bind(this);
     this.create_square = this.create_square.bind(this);
     this.playfair_cipher = this.playfair_cipher.bind(this);
 
-    this.state = {mode: 0};
+    this.state = {mode: 0, keyword: ""};
   }
 
   handleChange(e, mode_change){
@@ -28,7 +28,7 @@ class Playfair extends Component{
     if(mode_change) {
       (mode === 0) ? mode = 1 : mode = 0;
     }
-
+/*
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
         <PlayfairSquare square={this.create_square(keyword)} read_only={true}/>,
@@ -37,15 +37,25 @@ class Playfair extends Component{
     }
     else{
       ReactDOM.render(
-        <p/>,
-        document.getElementById('playfair-output')
+        <PlayfairSquare square={this.create_square("")} read_only={true}/>,
+        document.getElementById('playfair-table')
       );
-    }
+    }*/
   }
 
   handleClick(e){
     (this.state.mode === 0) ? this.setState({mode: 1}) : this.setState({mode: 0});
     this.handleChange(e, true);
+  }
+
+  keywordChange(e){
+    this.setState({keyword: e.target.value});
+    this.handleChange();
+  }
+
+  get_keyword(){
+    console.log("render :)");
+    return document.getElementById("playfair-keyword").value;
   }
 
 
@@ -66,7 +76,6 @@ class Playfair extends Component{
         square[i][j] = keyword.charAt(i * 5 + j);
       }
     }
-    console.log(square);
     return square;
   }
 
@@ -77,7 +86,7 @@ class Playfair extends Component{
         <Form>
           <Form.Group controlId="playfair-keyword">
             <Form.Label>Keyword:</Form.Label>
-            <Form.Control type="keyword" onChange={this.handleChange} placeholder="Enter keyword"/>
+            <Form.Control type="keyword" onChange={this.keywordChange} placeholder="Enter keyword"/>
             <Form.Text className="text-muted">
               Keyword is needed!
             </Form.Text>
@@ -95,7 +104,9 @@ class Playfair extends Component{
         </Button>
         <br/><br/>
         <h3 className="center">Table Being Used</h3>
-        <div id="playfair-table"/>
+        <div id="playfair-table">
+          <PlayfairSquare square={this.create_square(this.state.keyword)} read_only={true}/>
+        </div>
         <Jumbotron>
           <h2 className="center">Output</h2>
           <div id="playfair-output"/>
