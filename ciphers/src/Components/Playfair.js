@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
@@ -29,8 +31,8 @@ class Playfair extends Component{
 
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
-        <PlayfairSquare square={this.create_square(keyword)} read_only={true}/>,//<p>{this.playfair_cipher(keyword,input,mode)}</p>,
-        document.getElementById('playfair-output')
+        <PlayfairSquare square={this.create_square(keyword)} read_only={true}/>,
+        document.getElementById('playfair-table')
       );
     }
     else{
@@ -92,6 +94,8 @@ class Playfair extends Component{
           {(this.state.mode === 0) ? "Encrypt Mode" : "Decrypt Mode"}
         </Button>
         <br/><br/>
+        <h3 className="center">Table Being Used</h3>
+        <div id="playfair-table"/>
         <Jumbotron>
           <h2 className="center">Output</h2>
           <div id="playfair-output"/>
