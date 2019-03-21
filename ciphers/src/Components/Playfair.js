@@ -68,25 +68,10 @@ class Playfair extends Component{
     var row_hash = this.create_row_hash(square);
     var col_hash = this.create_col_hash(square);
     var letters = text.toLowerCase().match(/[a-z]/g); //Need to replace all letter_to_replace with replacement.
-    if(mode === 0){ //Encrypting
-      console.log("hello");
-      letters = this.format_text(letters);
-      /*for(i=0; i<letters.length - 1; i+=2){
-        //Perform encryption based on case.
-        if(row_hash[letters[i]] === row_hash[letters[i+1]]){ //Row Case
-          new_text += this.row_case(square, row_hash[letters[i]], col_hash[letters[i]], col_hash[letters[i+1]]);
-        }
-        else if (col_hash[letters[i]] === col_hash[letters[i+1]]) { // Column case
-          new_text += this.col_case(square, col_hash[letters[i]], row_hash[letters[i]], row_hash[letters[i+1]]);
-        }
-        else{ //Square case
-          new_text += this.square_case(square, row_hash[letters[i]], row_hash[letters[i+1]], col_hash[letters[i]], col_hash[letters[i+1]]);
-        }
-      }*/
-    }
-    else{ // Decrypting
-      /*for(i=0; i<letters.length - 1; i+=2){
-        //Perform decryption based on case.
+    if(mode === 0) letters = this.format_text(letters); //Reformat text for encryption
+    if(letters.length % 2 === 0) { //Has to be even since letters are paired together to encipher/decipher
+      for(i=0; i<letters.length; i+=2){
+        //Perform encryption/decryption based on case.
         if(row_hash[letters[i]] === row_hash[letters[i+1]]){ //Row Case
           new_text += this.row_case(square, row_hash[letters[i]], col_hash[letters[i]], col_hash[letters[i+1]], mode);
         }
@@ -94,9 +79,9 @@ class Playfair extends Component{
           new_text += this.col_case(square, col_hash[letters[i]], row_hash[letters[i]], row_hash[letters[i+1]], mode);
         }
         else{ //Square case
-          new_text += this.square_case(square, row_hash[letters[i]], row_hash[letters[i+1]], col_hash[letters[i]], col_hash[letters[i+1]]);
+          new_text += this.square_case(square, row_hash[letters[i]], col_hash[letters[i]], row_hash[letters[i+1]], col_hash[letters[i+1]]);
         }
-      }*/
+      }
     }
     return new_text;
   }
@@ -105,7 +90,7 @@ class Playfair extends Component{
   // letters: an array of letters
   format_text(letters, letter_to_replace, replacement){
     for(var i=0; i<letters.length; i+=2){
-      if (letters[i] === letter_to_replace) letters[i] = replacement; //See if letters need to be replaced.
+      if (letters[i] === letter_to_replace) letters[i] = replacement; //See if letter need to be replaced.
       if (!letters[i+1]) { // Add filler,but don't create repetitions (leads to infinite looping)
         if(letters[i] === "x"){
           letters.push("z");
@@ -114,7 +99,7 @@ class Playfair extends Component{
           letters.push("x");
         }
       }
-      if (letters[i+1] === letter_to_replace) letters[i+1] = replacement;
+      if (letters[i+1] === letter_to_replace) letters[i+1] = replacement; //See if letter need to be replaced.
       if (letters[i] === letters[i+1]) {//Need to ensure letters are not the same
         if(letters[i] === "x"){
           letters.splice(i+1, 0, "z");
