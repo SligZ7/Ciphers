@@ -14,9 +14,14 @@ class Playfair extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.keywordChange = this.keywordChange.bind(this);
-    this.get_keyword = this.get_keyword.bind(this);
     this.create_square = this.create_square.bind(this);
+    this.create_row_hash = this.create_row_hash.bind(this);
+    this.create_col_hash = this.create_col_hash.bind(this);
     this.playfair_cipher = this.playfair_cipher.bind(this);
+    this.format_text = this.format_text.bind(this);
+    this.square_case = this.square_case.bind(this);
+    this.row_case = this.row_case.bind(this);
+    this.col_case = this.col_case.bind(this);
 
     this.state = {mode: 0, keyword: ""};
   }
@@ -28,19 +33,19 @@ class Playfair extends Component{
     if(mode_change) {
       (mode === 0) ? mode = 1 : mode = 0;
     }
-/*
+
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
-        <PlayfairSquare square={this.create_square(keyword)} read_only={true}/>,
-        document.getElementById('playfair-table')
+        <p>{this.playfair_cipher(keyword, input, mode)}</p>,
+        document.getElementById('playfair-output')
       );
     }
     else{
       ReactDOM.render(
-        <PlayfairSquare square={this.create_square("")} read_only={true}/>,
-        document.getElementById('playfair-table')
+        <p/>,
+        document.getElementById('playfair-output')
       );
-    }*/
+    }
   }
 
   handleClick(e){
@@ -53,16 +58,106 @@ class Playfair extends Component{
     this.handleChange();
   }
 
-  get_keyword(){
-    console.log("render :)");
-    return document.getElementById("playfair-keyword").value;
-  }
-
 
   //Mode indicates whether to encrypt or decrypt.
   //  0: Encrypt, 1:Decrypt
-  playfair_cipher(keyword, text, mode=0){
+  playfair_cipher(keyword, text, mode=0, letter_to_replace="j", replacement="i"){
+    var square = this.create_square(keyword);
+    var i;
+    var new_text = "";
+    var row_hash = this.create_row_hash(square);
+    var col_hash = this.create_col_hash(square);
+    var letters = text.toLowerCase().match(/[a-z]/g); //Need to replace all letter_to_replace with replacement.
+    if(mode === 0){ //Encrypting
+      console.log("hello");
+      letters = this.format_text(letters);
+      /*for(i=0; i<letters.length - 1; i+=2){
+        //Perform encryption based on case.
+        if(row_hash[letters[i]] === row_hash[letters[i+1]]){ //Row Case
+          new_text += this.row_case(square, row_hash[letters[i]], col_hash[letters[i]], col_hash[letters[i+1]]);
+        }
+        else if (col_hash[letters[i]] === col_hash[letters[i+1]]) { // Column case
+          new_text += this.col_case(square, col_hash[letters[i]], row_hash[letters[i]], row_hash[letters[i+1]]);
+        }
+        else{ //Square case
+          new_text += this.square_case(square, row_hash[letters[i]], row_hash[letters[i+1]], col_hash[letters[i]], col_hash[letters[i+1]]);
+        }
+      }*/
+    }
+    else{ // Decrypting
+      /*for(i=0; i<letters.length - 1; i+=2){
+        //Perform decryption based on case.
+        if(row_hash[letters[i]] === row_hash[letters[i+1]]){ //Row Case
+          new_text += this.row_case(square, row_hash[letters[i]], col_hash[letters[i]], col_hash[letters[i+1]], mode);
+        }
+        else if (col_hash[letters[i]] === col_hash[letters[i+1]]) { // Column case
+          new_text += this.col_case(square, col_hash[letters[i]], row_hash[letters[i]], row_hash[letters[i+1]], mode);
+        }
+        else{ //Square case
+          new_text += this.square_case(square, row_hash[letters[i]], row_hash[letters[i+1]], col_hash[letters[i]], col_hash[letters[i+1]]);
+        }
+      }*/
+    }
+    return new_text;
+  }
 
+  //Need to modify text for playfair
+  // letters: an array of letters
+  format_text(letters, letter_to_replace, replacement){
+    for(var i=0; i<letters.length; i+=2){
+      if (letters[i] === letter_to_replace) letters[i] = replacement; //See if letters need to be replaced.
+      if (!letters[i+1]) { // Add filler,but don't create repetitions (leads to infinite looping)
+        if(letters[i] === "x"){
+          letters.push("z");
+        }
+        else{
+          letters.push("x");
+        }
+      }
+      if (letters[i+1] === letter_to_replace) letters[i+1] = replacement;
+      if (letters[i] === letters[i+1]) {//Need to ensure letters are not the same
+        if(letters[i] === "x"){
+          letters.splice(i+1, 0, "z");
+        }
+        else{
+          letters.splice(i+1, 0, "x");
+        }
+      }
+    }
+    return letters;
+  }
+
+  //Square case, when not in same row or column.
+  square_case(square, row_a, col_a, row_b, col_b){
+    return (square[row_a][col_b] + square[row_b][col_a]);
+  }
+
+  //Row case, when in the same row. Encrypt go to the right one, Decrypt do to the left one.
+  row_case(square, row, col_a, col_b, mode=0){
+    if(mode === 0){
+      (col_a + 1 > 4) ? col_a -= 4 : col_a++;
+      (col_b + 1 > 4) ? col_b -= 4 : col_b++;
+      return (square[row][col_a] + square[row][col_b]);
+    }
+    else{
+      (col_a - 1 < 0) ? col_a += 4 : col_a--;
+      (col_b - 1 < 0) ? col_b += 4 : col_b--;
+      return (square[row][col_a] + square[row][col_b]);
+    }
+  }
+
+  //Column case, when in the same column. Encrypt go to the down one, Decrypt do to the up one.
+  col_case(square, col, row_a, row_b, mode=0){
+    if(mode === 0){
+      (row_a - 1 < 0) ? row_a += 4 : row_a--;
+      (row_b - 1 < 0) ? row_b += 4 : row_b--;
+      return (square[row_a][col] + square[row_b][col]);
+    }
+    else{
+      (row_a + 1 > 4) ? row_a -= 4 : row_a++;
+      (row_b + 1 > 4) ? row_b -= 4 : row_b++;
+      return (square[row_a][col] + square[row_b][col]);
+    }
   }
 
   create_square(keyword, letter_to_replace="j"){
@@ -77,6 +172,26 @@ class Playfair extends Component{
       }
     }
     return square;
+  }
+
+  create_row_hash(square){
+    var i, j, hash = {};
+    for(i=0; i<5;i++){
+      for(j=0; j<5;j++){
+        hash[square[i][j]] = i;
+      }
+    }
+    return hash;
+  }
+
+  create_col_hash(square){
+    var i, j, hash = {};
+    for(i=0; i<5;i++){
+      for(j=0; j<5;j++){
+        hash[square[i][j]] = j;
+      }
+    }
+    return hash;
   }
 
   render() {
