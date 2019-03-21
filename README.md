@@ -64,7 +64,9 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 
 ~~- Ask for keyword (works same for both encrypting and decrypting(go backwards when decrypting, but square is the same))~~
 
-- Replace given text with the box constructed from  the keyword
+~~- Replace given text with the box constructed from  the keyword~~
+
+- Give user option on which character to replace with what (may need to do more work for reformatting)
 
 ###### Extra (Provide tools to assist cryptanalysis)
 - letter frequency
@@ -79,3 +81,5 @@ Provides the ability to quickly and easily encipher or decipher text (most need 
 - Rework buttons to switch modes
 
 - Separate components into smaller components
+
+- Improve overall code quality
