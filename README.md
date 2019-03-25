@@ -1,85 +1,40 @@
 # Ciphers
-Provides the ability to quickly and easily encipher or decipher text (most need a keyword) with the cipher of the user's choosing.
+Provides the ability to quickly and easily encipher or decipher text (most need a keyword) with the cipher of the user's choosing. Gives user ability to cryptanalysis
+text with given tools(in the near future).
 
-## Uses
-- Node( for installing react and react bootstrap)
+## Getting Started
 
-- React
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-- React Bootstrap
+### Prerequisites
 
-## Design (In-Progress)
+You will first need [Nodejs and npm](https://nodejs.org/en/).
 
-### Caesar Shift Functions
-~~- Retrieve user input~~
+### Installing
 
-~~- Shift to specifications~~
+Entering the following command in the command prompt to install React-Bootstrap:
 
-~~- Get all shifts~~
+```
+npm install react-bootstrap bootstrap
+```
 
-~~- Display shift or shifts.~~
+Then navigate the command prompt to the ciphers directory and enter:
 
-~~- Limit input for how to shift!!!~~
+```
+npm start
+```
 
-~~- Display shifts as text is given.~~
+This should allow you to see the app in browser at http://localhost:3000/
 
-### Monoalphabetic Functions
-~~- Retrieve user input~~
+## Deployment
 
-~~- Ask for keyword (works same for both encrypting and decrypting)~~
+Information on how to deploy can be found [here](https://facebook.github.io/create-react-app/docs/deployment).
 
-~~- Replace given text with new alphabet constructed from keyword~~
+## Built With
 
-###### Extra (Provide tools to assist cryptanalysis)
-- letter frequency
+* [React](https://reactjs.org/) - The app framework used
+* [React Bootstrap](https://react-bootstrap.github.io/) - User interface
 
-- graph showing frequency of the next letter after itself
+## Authors
 
-- digraph and trigraph frequency
-
-- on the fly letter replacement to see changes
-
-
-### Vigenere Functions
-~~- Retrieve user input~~
-
-~~- Ask for keyword~~
-
-~~- Add button to toggle encrypting and decrypting~~
-
-~~- Replace given text with the different alphabets constructed from  the keyword~~ ~~(Also go backwards to decrypt)~~
-
-
-###### Extra (Provide tools to assist cryptanalysis)
-- counting the repetitions of letter sequences and spaces between them
-
-- provide possible lengths of keyword based on repetitions
-
-- provide letter distributions based on suspected length of keyword
-
-- on the fly letter replacement to see changes
-
-### Playfair Functions
-~~- Retrieve user input~~
-
-~~- Ask for keyword (works same for both encrypting and decrypting(go backwards when decrypting, but square is the same))~~
-
-~~- Replace given text with the box constructed from  the keyword~~
-
-- Give user option on which character to replace with what (may need to do more work for reformatting)
-
-###### Extra (Provide tools to assist cryptanalysis)
-- letter frequency
-
-- digraph and trigraph frequency
-
-- provide working box with ease to move letters around
-
-- on the fly letter replacement to see changes
-
-### Other Issues
-- Rework buttons to switch modes
-
-- Separate components into smaller components
-
-- Improve overall code quality
+* **Zack Sliger** - *Initial work* - [Ciphers](https://github.com/Ciphers)
