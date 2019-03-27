@@ -10,22 +10,13 @@ class Caesar extends Component{
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.get_shifts = this.get_shifts.bind(this);
   }
 
   handleChange(event){
     ReactDOM.render(
-      <Shifts shifts={this.get_shifts(event.target.value)}/>,
+      <Shifts shifts={get_shifts(event.target.value)}/>,
       document.getElementById('caesar-output')
     );
-  }
-
-  get_shifts(input){
-    var shifts = [];
-    for(var i=1; i<26; i++){
-      shifts.push(shift(input, i));
-    }
-    return shifts;
   }
 
   render() {
@@ -44,12 +35,20 @@ class Caesar extends Component{
         <Jumbotron>
           <h2 className="center">Shifts</h2>
           <div id="caesar-output">
-            <Shifts shifts={this.get_shifts("")}/>
+            <Shifts shifts={get_shifts("")}/>
           </div>
         </Jumbotron>
       </Container>
     );
   }
+}
+
+function get_shifts(input){
+  var shifts = [];
+  for(var i=1; i<26; i++){
+    shifts.push(shift(input, i));
+  }
+  return shifts;
 }
 
 function shift(str, shift_num){
@@ -70,5 +69,5 @@ function shift(str, shift_num){
   return shift;
 }
 
-export {shift};
+export {get_shifts, shift};
 export default Caesar;

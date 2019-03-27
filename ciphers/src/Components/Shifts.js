@@ -26,7 +26,7 @@ function display_shifts(shifts){
     return(
       <tr key={"shift-" + index.toString()}>
         <td>{index + 1}</td>
-        <td><Form.Control as="textarea" rows="2" plaintext={true} value={shift}/></td>
+        <td><Form.Control as="textarea" rows="2" plaintext={true} defaultValue={shift}/></td>
       </tr>
   );
   });
