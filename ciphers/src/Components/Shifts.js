@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 class Shifts extends Component{
   render() {
     return (
-      <Table responsive="md" size="xl" className="center">
+      <Table responsive='md' size='xl' className='center'>
         <thead>
           <tr>
             <th>Shifted by</th>
@@ -14,19 +14,19 @@ class Shifts extends Component{
           </tr>
         </thead>
         <tbody>
-          {display_shifts(this.props.shifts)}
+          {displayShifts(this.props.shifts)}
         </tbody>
       </Table>
       );
   }
 }
 
-function display_shifts(shifts){
-  return shifts.map(function(shift,index){
+function displayShifts(shifts){
+  return shifts.map(function(shift, index){
     return(
-      <tr key={"shift-" + index.toString()}>
+      <tr key={'shift-' + index.toString()}>
         <td>{index + 1}</td>
-        <td><Form.Control as="textarea" rows="2" plaintext={true} defaultValue={shift}/></td>
+        <td><Form.Control as='textarea' rows='2' plaintext value={shift}/></td>
       </tr>
   );
   });

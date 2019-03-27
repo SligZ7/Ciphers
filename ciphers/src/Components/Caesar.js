@@ -14,28 +14,28 @@ class Caesar extends Component{
 
   handleChange(event){
     ReactDOM.render(
-      <Shifts shifts={get_shifts(event.target.value)}/>,
+      <Shifts shifts={getShifts(event.target.value)}/>,
       document.getElementById('caesar-output')
     );
   }
 
   render() {
     return (
-      <Container fluid="true">
+      <Container fluid>
         <Container>
-          <h1 className="center">Caesar Shift Cipher</h1>
-          <Form.Group controlId="caesar-input">
+          <h1 className='center'>Caesar Shift Cipher</h1>
+          <Form.Group controlId='caesar-input'>
             <Form.Label>Enter text to see shifts:</Form.Label>
-            <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Enter Text"/>
-            <Form.Text className="text-muted">
+            <Form.Control as='textarea' rows='3' onChange={this.handleChange} placeholder='Enter Text'/>
+            <Form.Text className='text-muted'>
               Any characters that are not alphabetical will be ignored and unchanged!
             </Form.Text>
           </Form.Group>
         </Container>
         <Jumbotron>
-          <h2 className="center">Shifts</h2>
-          <div id="caesar-output">
-            <Shifts shifts={get_shifts("")}/>
+          <h2 className='center'>Shifts</h2>
+          <div id='caesar-output'>
+            <Shifts shifts={getShifts('')}/>
           </div>
         </Jumbotron>
       </Container>
@@ -43,7 +43,7 @@ class Caesar extends Component{
   }
 }
 
-function get_shifts(input){
+function getShifts(input){
   var shifts = [];
   for(var i=1; i<26; i++){
     shifts.push(shift(input, i));
@@ -51,14 +51,14 @@ function get_shifts(input){
   return shifts;
 }
 
-function shift(str, shift_num){
+function shift(str, shiftNum){
   str = str.toUpperCase();
-  var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var shift = "";
+  var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var shift = '';
   for(var i=0; i<str.length; i++){
     var pos = alpha.indexOf(str.charAt(i));
     if(pos > -1){ // If character not in alphabet, do not change.
-      pos+= shift_num;
+      pos+= shiftNum;
       if (pos > 25) pos = pos - 26;
       shift += alpha.charAt(pos);
     }
@@ -69,5 +69,5 @@ function shift(str, shift_num){
   return shift;
 }
 
-export {get_shifts, shift};
+export {getShifts, shift};
 export default Caesar;

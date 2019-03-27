@@ -9,15 +9,14 @@ class Monoalpha extends Component{
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.monoalphabetic_cipher = this.monoalphabetic_cipher.bind(this);
   }
 
   handleChange(event){
-    var input = document.getElementById("monoalpha-input").value;
-    var keyword = document.getElementById("monoalpha-keyword").value;
+    var input = document.getElementById('monoalpha-input').value;
+    var keyword = document.getElementById('monoalpha-keyword').value;
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
-        <p>{this.monoalphabetic_cipher(keyword,input)}</p>,
+        <p>{monoalphabeticCipher(keyword,input)}</p>,
         document.getElementById('monoalpha-output')
       );
     }
@@ -29,66 +28,66 @@ class Monoalpha extends Component{
     }
   }
 
-  monoalphabetic_cipher(keyword, text){
-    var reg_alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var new_alpha = get_new_alphabet(keyword);
-    text = text.toUpperCase();
-    for(var i=0; i<text.length; i++){
-      text = text.replace(text.charAt(i), new_alpha.charAt(reg_alpha.indexOf(text.charAt(i))));
-    }
-    return text;
-  }
-
   render() {
     return (
       <Container>
-        <h1 className="center">Monoalphabetic Cipher</h1>
+        <h1 className='center'>Monoalphabetic Cipher</h1>
         <Form>
-          <Form.Group controlId="monoalpha-keyword">
+          <Form.Group controlId='monoalpha-keyword'>
             <Form.Label>Keyword:</Form.Label>
-            <Form.Control type="keyword" onChange={this.handleChange} placeholder="Enter keyword"/>
-            <Form.Text className="text-muted">
+            <Form.Control type='keyword' onChange={this.handleChange} placeholder='Enter keyword'/>
+            <Form.Text className='text-muted'>
               Keyword is needed!
             </Form.Text>
           </Form.Group>
-          <Form.Group controlId="monoalpha-input">
+          <Form.Group controlId='monoalpha-input'>
             <Form.Label/>
-            <Form.Control as="textarea" rows="3" onChange={this.handleChange} placeholder="Enter Text"/>
-            <Form.Text className="text-muted">
+            <Form.Control as='textarea' rows='3' onChange={this.handleChange} placeholder='Enter Text'/>
+            <Form.Text className='text-muted'>
               Any characters that are not alphabetical will be ignored and unchanged!
             </Form.Text>
           </Form.Group>
         </Form>
         <Jumbotron>
-          <h2 className="center">Output</h2>
-          <div id="monoalpha-output"/>
+          <h2 className='center'>Output</h2>
+          <div id='monoalpha-output'/>
         </Jumbotron>
       </Container>
     );
   }
 }
 
-function get_new_alphabet(keyword){
+function monoalphabeticCipher(keyword, text){
+  var regAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var newAlpha = getNewAlphabet(keyword);
+  text = text.toUpperCase();
+  for(var i=0; i<text.length; i++){
+    text = text.replace(text.charAt(i), newAlpha.charAt(regAlpha.indexOf(text.charAt(i))));
+  }
+  return text;
+}
+
+function getNewAlphabet(keyword){
     var letters = keyword.toLowerCase().match(/[a-z]/g); //ignore any other characters beside a-z.
-    var reg_alpha = "abcdefghijklmnopqrstuvwxyz";
-    var new_alpha = "";
+    var regAlpha = 'abcdefghijklmnopqrstuvwxyz';
+    var newAlpha = '';
     var i = 0;
 
     if(letters){
-      while (i < letters.length && new_alpha.length !== 26) {
-        if(new_alpha.indexOf(letters[i]) < 0) {
-          new_alpha += letters[i];
-          reg_alpha = reg_alpha.replace(letters[i], "");
+      while (i < letters.length && newAlpha.length !== 26) {
+        if(newAlpha.indexOf(letters[i]) < 0) {
+          newAlpha += letters[i];
+          regAlpha = regAlpha.replace(letters[i], '');
         }
         i++;
       }
-      if(new_alpha.length < 26) new_alpha += reg_alpha; //Fill rest of new alphabet with remaining letters.
+      if(newAlpha.length < 26) newAlpha += regAlpha; //Fill rest of new alphabet with remaining letters.
     }
     else{
-      new_alpha = reg_alpha;
+      newAlpha = regAlpha;
     }
-    return new_alpha;
+    return newAlpha;
 }
 
-export {get_new_alphabet};
+export {getNewAlphabet};
 export default Monoalpha;
