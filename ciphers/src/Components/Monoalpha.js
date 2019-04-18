@@ -16,13 +16,13 @@ class Monoalpha extends Component{
     var keyword = document.getElementById('monoalpha-keyword').value;
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
-        <p>{monoalphabeticCipher(keyword,input)}</p>,
+        <p>{monoalphabeticCipher(keyword, input)}</p>,
         document.getElementById('monoalpha-output')
       );
     }
     else{
       ReactDOM.render(
-        <p/>,
+        <p />,
         document.getElementById('monoalpha-output')
       );
     }
@@ -57,6 +57,13 @@ class Monoalpha extends Component{
   }
 }
 
+//Performs monoalphabetic substituion.
+//  keyword: String of letters used to create new alphabet to perform substituion.
+//  text: String to encrypt/decrypt.
+//  @Returns:
+//    text: Given text that has been substituted based on the keyword given.
+
+/*** TO DO: Alter function to use hash for greater time efficiency. ***/
 function monoalphabeticCipher(keyword, text){
   var regAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var newAlpha = getNewAlphabet(keyword);
@@ -67,6 +74,12 @@ function monoalphabeticCipher(keyword, text){
   return text;
 }
 
+//Creates new alphabet from keyword to use for monoalphabetic substituion.
+//New alphabet is constructed removing any repetitions in keyword and adding any missing letters to the end
+//in the order they appear in the normal alphabet.
+//  keyword: String of letters used to create new alphabetic to perform substituion.
+//  @Returns:
+//    newAlpha: New alphabet constructed using keyword.
 function getNewAlphabet(keyword){
     var letters = keyword.toLowerCase().match(/[a-z]/g); //ignore any other characters beside a-z.
     var regAlpha = 'abcdefghijklmnopqrstuvwxyz';

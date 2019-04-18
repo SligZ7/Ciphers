@@ -74,20 +74,13 @@ class Vigenere extends Component{
   }
 }
 
-function getNewAlphabets(keyword){
-  var letters = keyword.toUpperCase().match(/[A-Z]/g); //ignore any other characters beside a-z.
-  var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var newAlphas = [];
-  if(letters){
-    for(var i=0; i<letters.length; i++){
-      newAlphas.push(shift(alpha, alpha.indexOf(letters[i])));
-    }
-  }
-  return newAlphas;
-}
-
-//Mode indicates whether to encrypt or decrypt.
-//  0: Encrypt, 1:Decrypt
+//Performs Vignere substituion.
+//  keyword: String of letters used to create new alphabets to perform substituion.
+//  text: String to encrypt/decrypt.
+//  Mode indicates whether to encrypt or decrypt. 0: Encrypt, 1:Decrypt
+//  @Returns:
+//    text: Given text that has been substituted based on the keyword given.
+/*** Could possibly be more time efficent, but using a hash is likely not the way. ***/
 function vigenereCipher(keyword, text, mode=0){
   var newAlphas = getNewAlphabets(keyword);
   var regAlpha = 'abcdefghijklmnopqrstuvwxyz';
@@ -111,5 +104,23 @@ function vigenereCipher(keyword, text, mode=0){
     return text;
   }
 }
+
+//Creates new alphabets from keyword to use for monoalphabetic substituion.
+//Each new alphabet is constructed by shifting the regular alphabet so that the current letter is the first letter.
+//  keyword: String of letters used to create new alphabets to perform substituion.
+//  @Returns:
+//    newAlphas: An array of strings containing the new alphabets.
+function getNewAlphabets(keyword){
+  var letters = keyword.toUpperCase().match(/[A-Z]/g); //ignore any other characters beside a-z.
+  var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var newAlphas = [];
+  if(letters){
+    for(var i=0; i<letters.length; i++){
+      newAlphas.push(shift(alpha, alpha.indexOf(letters[i])));
+    }
+  }
+  return newAlphas;
+}
+
 
 export default Vigenere;

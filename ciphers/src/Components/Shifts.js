@@ -21,6 +21,9 @@ class Shifts extends Component{
   }
 }
 
+//Displays all given shifts
+//  shifts: An array of strings
+//  @Returns: HTML of table rows filled with data from shifts
 function displayShifts(shifts){
   return shifts.map(function(shift, index){
     return(

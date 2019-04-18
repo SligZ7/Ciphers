@@ -86,14 +86,21 @@ class Playfair extends Component{
   }
 }
 
-//Mode indicates whether to encrypt or decrypt.
-//  0: Encrypt, 1:Decrypt
-function playfairCipher(keyword, text, mode=0, letter_to_replace='j', replacement='i'){
+//Performs Playfair substituion.
+//  keyword: String of letters used to create new alphabets to perform substituion.
+//  text: String to encrypt/decrypt.
+//  mode: indicates whether to encrypt or decrypt. 0: Encrypt, 1:Decrypt
+//  letterToReplace: Square can only have 25 letters, so one must be replaced. j is usually replaced by i.
+//  replacement: letter that will be used as replacement.
+//  @Returns:
+//    newText: Given text that has been substituted based on the keyword given.
+function playfairCipher(keyword, text, mode=0, letterToReplace='j', replacement='i'){
   var square = createSquare(keyword);
   var newText = '';
-  var rowHash = createRowHash(square);
-  var colHash = createColHash(square);
-  var letters = text.toLowerCase().match(/[a-z]/g); //Need to replace all letter_to_replace with replacement.
+  var hash = createHash(square);
+  var rowHash = hash.row;
+  var colHash = hash.col;
+  var letters = text.toLowerCase().match(/[a-z]/g); //Need to replace all letterToReplace with replacement.
   if(mode === 0) letters = formatText(letters); //Reformat text for encryption
   if(letters.length % 2 === 0) { //Has to be even since letters are paired together to encipher/decipher
     for(var i=0; i<letters.length; i+=2){
@@ -112,12 +119,16 @@ function playfairCipher(keyword, text, mode=0, letter_to_replace='j', replacemen
   return newText;
 }
 
-//Need to modify text for playfair
-// letters: an array of letters
-function formatText(letters, letter_to_replace, replacement){
+//Modifies text for playfair
+//  text: String to encrypt/decrypt.
+//  letterToReplace: Square can only have 25 letters, so one must be replaced. j is usually replaced by i.
+//  replacement: letter that will be used as replacement.
+//  @Returns:
+//    letters: an array of letters
+function formatText(letters, letterToReplace, replacement){
   for(var i=0; i<letters.length; i+=2){
-    if (letters[i] === letter_to_replace) letters[i] = replacement; //See if letter need to be replaced.
-    if (!letters[i+1]) { // Add filler,but don't create repetitions (leads to infinite looping)
+    if (letters[i] === letterToReplace) letters[i] = replacement; //See if letter need to be replaced.
+    if (!letters[i+1]) { // Add filler, but don't create repetitions (leads to infinite looping)
       if(letters[i] === 'x'){
         letters.push('z');
       }
@@ -125,7 +136,7 @@ function formatText(letters, letter_to_replace, replacement){
         letters.push('x');
       }
     }
-    if (letters[i+1] === letter_to_replace) letters[i+1] = replacement; //See if letter need to be replaced.
+    if (letters[i+1] === letterToReplace) letters[i+1] = replacement; //See if letter need to be replaced.
     if (letters[i] === letters[i+1]) {//Need to ensure letters are not the same
       if(letters[i] === 'x'){
         letters.splice(i+1, 0, 'z');
@@ -139,43 +150,68 @@ function formatText(letters, letter_to_replace, replacement){
 }
 
 //Square case, when not in same row or column.
-function squareCase(square, row_a, col_a, row_b, col_b){
-  return (square[row_a][col_b] + square[row_b][col_a]);
+//  square: Playfair square being used. Multidimensional Array.
+//  rowA: row of first letter.
+//  rowB: row of second letter.
+//  colA: column of first letter.
+//  colB: column of second letter.
+//  @Returns: Two letters encrypted/decrypted.
+function squareCase(square, rowA, colA, rowB, colB){
+  return (square[rowA][colB] + square[rowB][colA]);
 }
 
 //Row case, when in the same row. Encrypt go to the right one, Decrypt do to the left one.
-function rowCase(square, row, col_a, col_b, mode=0){
+//  square: Playfair square being used. Multidimensional Array.
+//  row: row of letters.
+//  colA: column of first letter.
+//  colB: column of second letter.
+//  mode: indicates whether to encrypt or decrypt. 0: Encrypt, 1:Decrypt
+//  @Returns: Two letters encrypted/decrypted.
+function rowCase(square, row, colA, colB, mode=0){
   if(mode === 0){
-    (col_a + 1 > 4) ? col_a -= 4 : col_a++;
-    (col_b + 1 > 4) ? col_b -= 4 : col_b++;
-    return (square[row][col_a] + square[row][col_b]);
+    (colA + 1 > 4) ? colA -= 4 : colA++;
+    (colB + 1 > 4) ? colB -= 4 : colB++;
+    return (square[row][colA] + square[row][colB]);
   }
   else{
-    (col_a - 1 < 0) ? col_a += 4 : col_a--;
-    (col_b - 1 < 0) ? col_b += 4 : col_b--;
-    return (square[row][col_a] + square[row][col_b]);
+    (colA - 1 < 0) ? colA += 4 : colA--;
+    (colB - 1 < 0) ? colB += 4 : colB--;
+    return (square[row][colA] + square[row][colB]);
   }
 }
 
 //Column case, when in the same column. Encrypt go to the down one, Decrypt do to the up one.
-function colCase(square, col, row_a, row_b, mode=0){
+//  square: Playfair square being used. Multidimensional Array.
+//  rowA: row of first letter.
+//  rowB: row of second letter.
+//  col: column of letters.
+//  mode: indicates whether to encrypt or decrypt. 0: Encrypt, 1:Decrypt
+//  @Returns: Two letters encrypted/decrypted.
+function colCase(square, col, rowA, rowB, mode=0){
   if(mode === 0){
-    (row_a - 1 < 0) ? row_a += 4 : row_a--;
-    (row_b - 1 < 0) ? row_b += 4 : row_b--;
-    return (square[row_a][col] + square[row_b][col]);
+    (rowA - 1 < 0) ? rowA += 4 : rowA--;
+    (rowB - 1 < 0) ? rowB += 4 : rowB--;
+    return (square[rowA][col] + square[rowB][col]);
   }
   else{
-    (row_a + 1 > 4) ? row_a -= 4 : row_a++;
-    (row_b + 1 > 4) ? row_b -= 4 : row_b++;
-    return (square[row_a][col] + square[row_b][col]);
+    (rowA + 1 > 4) ? rowA -= 4 : rowA++;
+    (rowB + 1 > 4) ? rowB -= 4 : rowB++;
+    return (square[rowA][col] + square[rowB][col]);
   }
 }
 
-function createSquare(keyword, letter_to_replace='j'){
+//Creates Plafair square based on keyword. Used keyword with letter repetitions ignored
+//and add any missing letters to the end(except letterToReplace) in the order they normally
+//appear.
+//  keyword: string used to construct square.
+//  letterToReplace: letter to ignore when creating square. Usually j.
+//  @Returns:
+//    square: Plafair square. Multidimensional array of single letters.
+function createSquare(keyword, letterToReplace='j'){
   var i       // the first-order index in square
     , j       // the second order index in square
     , square = [];
-  keyword = getNewAlphabet(keyword).replace(letter_to_replace, ''); // Still needs to replace letter with intended replacement when encrypting
+  keyword = getNewAlphabet(keyword).replace(letterToReplace, ''); // Still needs to replace letter with intended replacement when encrypting
   for(i=0; i<5;i++){
     square[i] = [];
     for(j=0; j<5;j++){
@@ -185,24 +221,19 @@ function createSquare(keyword, letter_to_replace='j'){
   return square;
 }
 
-function createRowHash(square){
-  var i, j, hash = {};
+//Creates row and col hash of the letters in square.
+//  square: Playfair square being used. Multidimensional array.
+//@Returns:
+//  hash: returns object containing rowHash and colHash.
+function createHash(square){
+  var i, j, rowHash = {}, colHash = {};
   for(i=0; i<5;i++){
     for(j=0; j<5;j++){
-      hash[square[i][j]] = i;
+      rowHash[square[i][j]] = i;
+      colHash[square[i][j]] = j;
     }
   }
-  return hash;
-}
-
-function createColHash(square){
-  var i, j, hash = {};
-  for(i=0; i<5;i++){
-    for(j=0; j<5;j++){
-      hash[square[i][j]] = j;
-    }
-  }
-  return hash;
+  return {row: rowHash, col: colHash};
 }
 
 export default Playfair;
