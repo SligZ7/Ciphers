@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
+import CipherForm from './CipherForm'
 import Button from 'react-bootstrap/Button'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import Output from './Output'
 import {shift} from './Caesar'
 
 class Vigenere extends Component{
@@ -24,7 +24,7 @@ class Vigenere extends Component{
     }
     if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
       ReactDOM.render(
-        <p>{this.vigenereCipher(keyword,input,mode)}</p>,
+        <p>{vigenereCipher(keyword,input,mode)}</p>,
         document.getElementById('vigenere-output')
       );
     }
@@ -45,30 +45,12 @@ class Vigenere extends Component{
     return (
       <Container>
         <h1 className='center'>Vigenere Cipher</h1>
-        <Form>
-          <Form.Group controlId='vigenere-keyword'>
-            <Form.Label>Keyword:</Form.Label>
-            <Form.Control type='keyword' onChange={this.handleChange} placeholder='Enter keyword'/>
-            <Form.Text className='text-muted'>
-              Keyword is needed!
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId='vigenere-input'>
-            <Form.Label/>
-            <Form.Control as='textarea' rows='3' onChange={this.handleChange} placeholder='Enter Text'/>
-            <Form.Text className='text-muted'>
-              Any characters that are not alphabetical will be ignored and unchanged!
-            </Form.Text>
-          </Form.Group>
-        </Form>
+        <CipherForm keywordId='vigenere-keyword' keywordChangeHandler={this.handleChange} inputId='vigenere-input' textChangeHandler={this.handleChange} />
         <Button id='vigenere-mode' type='button' variant='primary' onClick={this.handleClick}>
           {(this.state.mode === 0) ? 'Encrypt Mode' : 'Decrypt Mode'}
         </Button>
         <br/><br/>
-        <Jumbotron>
-          <h2 className='center'>Output</h2>
-          <div id='vigenere-output'/>
-        </Jumbotron>
+        <Output id='vigenere-output' />
       </Container>
     );
   }

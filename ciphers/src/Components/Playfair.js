@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
+import CipherForm from './CipherForm'
 import Button from 'react-bootstrap/Button'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import Output from './Output'
 import PlayfairSquare from './PlayfairSquare'
 import {getNewAlphabet} from './Monoalpha'
 
@@ -53,22 +53,7 @@ class Playfair extends Component{
     return (
       <Container>
         <h1 className='center'>Playfair Cipher</h1>
-        <Form>
-          <Form.Group controlId='playfair-keyword'>
-            <Form.Label>Keyword:</Form.Label>
-            <Form.Control type='keyword' onChange={this.keywordChange} placeholder='Enter keyword'/>
-            <Form.Text className='text-muted'>
-              Keyword is needed!
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId='playfair-input'>
-            <Form.Label/>
-            <Form.Control as='textarea' rows='3' onChange={this.handleChange} placeholder='Enter Text'/>
-            <Form.Text className='text-muted'>
-              Any characters that are not alphabetical will be ignored and unchanged!
-            </Form.Text>
-          </Form.Group>
-        </Form>
+        <CipherForm keywordId='playfair-keyword' keywordChangeHandler={this.keywordChange} inputId='playfair-input' textChangeHandler={this.handleChange} />
         <Button id='playfair-mode' type='button' variant='primary' onClick={this.handleClick}>
           {(this.state.mode === 0) ? 'Encrypt Mode' : 'Decrypt Mode'}
         </Button>
@@ -77,10 +62,7 @@ class Playfair extends Component{
         <div id='playfair-table'>
           <PlayfairSquare square={createSquare(this.state.keyword)} read_only/>
         </div>
-        <Jumbotron>
-          <h2 className='center'>Output</h2>
-          <div id='playfair-output'/>
-        </Jumbotron>
+        <Output id='playfair-output' />
       </Container>
     );
   }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Output from './Output'
 import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import CipherForm from './CipherForm'
 
 class Monoalpha extends Component{
   constructor(props){
@@ -32,26 +32,8 @@ class Monoalpha extends Component{
     return (
       <Container>
         <h1 className='center'>Monoalphabetic Cipher</h1>
-        <Form>
-          <Form.Group controlId='monoalpha-keyword'>
-            <Form.Label>Keyword:</Form.Label>
-            <Form.Control type='keyword' onChange={this.handleChange} placeholder='Enter keyword'/>
-            <Form.Text className='text-muted'>
-              Keyword is needed!
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId='monoalpha-input'>
-            <Form.Label/>
-            <Form.Control as='textarea' rows='3' onChange={this.handleChange} placeholder='Enter Text'/>
-            <Form.Text className='text-muted'>
-              Any characters that are not alphabetical will be ignored and unchanged!
-            </Form.Text>
-          </Form.Group>
-        </Form>
-        <Jumbotron>
-          <h2 className='center'>Output</h2>
-          <div id='monoalpha-output'/>
-        </Jumbotron>
+        <CipherForm keywordId='monoalpha-keyword' keywordChangeHandler={this.handleChange} inputId='monoalpha-input' textChangeHandler={this.handleChange} />
+        <Output id='monoalpha-output' />
       </Container>
     );
   }
