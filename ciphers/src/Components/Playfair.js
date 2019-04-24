@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Container from 'react-bootstrap/Container'
-import CipherForm from './CipherForm'
-import Button from 'react-bootstrap/Button'
-import Output from './Output'
-import PlayfairSquare from './PlayfairSquare'
-import {getNewAlphabet} from './Monoalpha'
+import Container from 'react-bootstrap/Container';
+import CipherForm from './CipherForm';
+import Button from 'react-bootstrap/Button';
+import Output from './Output';
+import PlayfairSquare from './PlayfairSquare';
+import {getNewAlphabet} from './Monoalpha';
 
 class Playfair extends Component{
   constructor(props){

@@ -21,11 +21,11 @@
 ~~- Replace given text with new alphabet constructed from keyword~~
 
 ###### Extra (Provide tools to assist cryptanalysis)
-- letter frequency
+~~- letter frequency~~
 
 - graph showing frequency of the next letter after itself
 
-- digraph and trigraph frequency
+~~- digraph and trigraph frequency~~
 
 - on the fly letter replacement to see changes
 
@@ -59,10 +59,6 @@
 - Give user option on which character to replace with what (may need to do more work for reformatting)
 
 ###### Extra (Provide tools to assist cryptanalysis)
-- letter frequency
-
-- digraph and trigraph frequency
-
 - provide working box with ease to move letters around
 
 - on the fly letter replacement to see changes
@@ -70,6 +66,6 @@
 ### Other Issues
 - Rework buttons to switch modes
 
-- Separate components into smaller components
+~~- Separate components into smaller components~~
 
-- Improve overall code quality
+- Improve overall code quality (In Progress)

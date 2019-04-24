@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 
 class CipherForm extends Component{
   render() {

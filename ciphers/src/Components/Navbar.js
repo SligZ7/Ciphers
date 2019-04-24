@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
-import Caesar from './Caesar'
-import Monoalpha from './Monoalpha'
-import Vigenere from './Vigenere'
-import Playfair from './Playfair'
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import Caesar from './Caesar';
+import Monoalpha from './Monoalpha';
+import Vigenere from './Vigenere';
+import Playfair from './Playfair';
+import Tools from './Tools';
 
 class Navbar extends Component{
   render() {
@@ -22,6 +23,9 @@ class Navbar extends Component{
           </Tab>
           <Tab eventKey='playfair' title='Playfair'>
             <Playfair />
+          </Tab>
+          <Tab eventKey='tools' title='Tools'>
+            <Tools />
           </Tab>
         </Tabs>
       </div>
