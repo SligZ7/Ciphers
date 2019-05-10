@@ -23,7 +23,7 @@
 ###### Extra (Provide tools to assist cryptanalysis)
 ~~- letter frequency~~
 
-- graph showing frequency of the next letter after itself
+~~- graph showing frequency of the letters~~
 
 ~~- digraph and trigraph frequency~~
 
@@ -68,4 +68,4 @@
 
 ~~- Separate components into smaller components~~
 
-- Improve overall code quality (In Progress)
+~~- Improve overall code quality (In Progress)~~ Done For Now

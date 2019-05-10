@@ -11,7 +11,7 @@ class Navbar extends Component{
   render() {
     return (
       <div>
-        <Tabs defaultActiveKey='caesar' id='tab'>
+        <Tabs defaultActiveKey='tools' id='tab'>
           <Tab eventKey='caesar' title='Caesar'>
             <Caesar />
           </Tab>
