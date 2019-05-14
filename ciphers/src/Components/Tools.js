@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Monograph from './Monograph';
+import HorizontalFrequencyGraph from './HorizontalFrequencyGraph'
 
 class Tools extends Component{
   constructor(props){
@@ -14,14 +15,18 @@ class Tools extends Component{
 
   handleSubmit(){
     var letterFreqs = letterFrequencyAnalysis(document.getElementById('tool-text').value);
-    //console.log(letterFreqs.letters);
-    //console.log(letterFreqs.digraphs);
     ReactDOM.render(
       <Monograph letterFreqs={letterFreqs.letters} />,
+      document.getElementById('monograph-id')
+    );
+    ReactDOM.render(
+      <HorizontalFrequencyGraph data={letterFreqs.digraphs} yLabel='Digrams' title='Digraph Frequencies' />,
       document.getElementById('digraph-id')
     );
-    //console.log(letterFreqs.trigraphs);
-    //console.log(letterFreqs);
+    ReactDOM.render(
+      <HorizontalFrequencyGraph data={letterFreqs.trigraphs} yLabel='Trigrams' title='Trigraph Frequencies' />,
+      document.getElementById('trigraph-id')
+    );
   }
 
   render() {
@@ -37,8 +42,10 @@ class Tools extends Component{
             </Form.Text>
           </Form.Group>
         </Form>
-        <Button type='submit' variant='primary' onClick={this.handleSubmit}>Submit</Button>
+        <Button type='submit' variant='primary' onClick={this.handleSubmit}>Analyze Text</Button>
+        <div id="monograph-id" />
         <div id="digraph-id" />
+        <div id="trigraph-id" />
       </Container>
       );
   }
