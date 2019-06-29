@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Shifts from './Shifts'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
@@ -10,16 +9,15 @@ class Caesar extends Component{
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.state = {input: ''}
   }
 
-  handleChange(event){
-    ReactDOM.render(
-      <Shifts shifts={getShifts(event.target.value)}/>,
-      document.getElementById('caesar-output')
-    );
+  handleChange(e){
+    this.setState({input: e.target.value});
   }
 
   render() {
+    const shifts = getShifts(this.state.input);
     return (
       <Container fluid>
         <Container>
@@ -35,7 +33,7 @@ class Caesar extends Component{
         <Jumbotron>
           <h2 className='center'>Shifts</h2>
           <div id='caesar-output'>
-            <Shifts shifts={getShifts('')}/>
+            <Shifts shifts={shifts}/>
           </div>
         </Jumbotron>
       </Container>

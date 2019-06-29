@@ -29,7 +29,7 @@ function displayShifts(shifts){
     return(
       <tr key={'shift-' + index.toString()}>
         <td>{index + 1}</td>
-        <td><Form.Control as='textarea' rows='2' plaintext value={shift}/></td>
+        <td><Form.Control as='textarea' rows='2' plaintext value={shift} readOnly /></td>
       </tr>
   );
   });

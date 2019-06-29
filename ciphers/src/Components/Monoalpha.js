@@ -1,39 +1,52 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Output from './Output'
-import Container from 'react-bootstrap/Container'
-import CipherForm from './CipherForm'
+import Output from './Output';
+import Container from 'react-bootstrap/Container';
+import CipherForm from './CipherForm';
+import ModeButton from './ModeButton';
 
 class Monoalpha extends Component{
   constructor(props){
     super(props);
 
+    this.modeChange = this.modeChange.bind(this);
+    this.getOutput = this.getOutput.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      mode: 0,
+      output: ''
+    };
   }
 
-  handleChange(event){
-    var input = document.getElementById('monoalpha-input').value;
-    var keyword = document.getElementById('monoalpha-keyword').value;
-    if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
-      ReactDOM.render(
-        <p>{monoalphabeticCipher(keyword, input)}</p>,
-        document.getElementById('monoalpha-output')
-      );
+  modeChange(e){
+    (this.state.mode === 0) ? this.setState({mode: 1}) : this.setState({mode: 0});
+  }
+
+  getOutput(){
+    var output = '';
+    if(document.getElementById('monoalpha-input') != null && document.getElementById('monoalpha-keyword') != null){
+      var input = document.getElementById('monoalpha-input').value;
+      var keyword = document.getElementById('monoalpha-keyword').value;
+      if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
+        output = monoalphabeticCipher(keyword, input, this.state.mode);
+      }
     }
-    else{
-      ReactDOM.render(
-        <p />,
-        document.getElementById('monoalpha-output')
-      );
-    }
+    return output;
+  }
+
+  handleChange(e){
+    this.setState({output: ''}); // Needed to rerender output when change occurs.
   }
 
   render() {
+    const mode = this.state.mode;
+    const output = this.getOutput(); //Needed to sync with button press
     return (
       <Container>
         <h1 className='center'>Monoalphabetic Cipher</h1>
         <CipherForm keywordId='monoalpha-keyword' keywordChangeHandler={this.handleChange} inputId='monoalpha-input' textChangeHandler={this.handleChange} />
-        <Output id='monoalpha-output' />
+        <ModeButton mode={mode} modeChange={this.modeChange} />
+        <br/><br/>
+        <Output id='monoalpha-output' text={output}/>
       </Container>
     );
   }
@@ -43,46 +56,56 @@ class Monoalpha extends Component{
 //  keyword: String of letters used to create new alphabet to perform substituion.
 //  text: String to encrypt/decrypt.
 //  @Returns:
-//    text: Given text that has been substituted based on the keyword given.
-
-/*** TO DO: Alter function to use hash for greater time efficiency. ***/
-function monoalphabeticCipher(keyword, text){
-  var regAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var newAlpha = getNewAlphabet(keyword);
-  text = text.toUpperCase();
-  for(var i=0; i<text.length; i++){
-    text = text.replace(text.charAt(i), newAlpha.charAt(regAlpha.indexOf(text.charAt(i))));
+//    output: Given text that has been substituted based on the keyword given.
+function monoalphabeticCipher(keyword, text, mode=0){
+  var output = ''
+  var oldToNewHash = getOldToNewAlphabetHash(getCipherAlphabet(keyword), mode);
+  text = mode ? text.toUpperCase() : text.toLowerCase();
+  for(var i=0; i<=text.length; i++){
+    if(text.charAt(i).match(/[a-zA-Z]/)) output += oldToNewHash[text.charAt(i)];
   }
-  return text;
+  return output;
 }
 
-//Creates new alphabet from keyword to use for monoalphabetic substituion.
-//New alphabet is constructed removing any repetitions in keyword and adding any missing letters to the end
+//Creates cipher alphabet from keyword.
+//Cipher alphabet is constructed removing any repetitions in keyword and adding any missing letters to the end
 //in the order they appear in the normal alphabet.
 //  keyword: String of letters used to create new alphabetic to perform substituion.
 //  @Returns:
-//    newAlpha: New alphabet constructed using keyword.
-function getNewAlphabet(keyword){
-    var letters = keyword.toLowerCase().match(/[a-z]/g); //ignore any other characters beside a-z.
-    var regAlpha = 'abcdefghijklmnopqrstuvwxyz';
-    var newAlpha = '';
-    var i = 0;
+//    cipherAlpha: Cipher alphabet constructed using keyword.
+function getCipherAlphabet(keyword){
+  var letters = keyword.toUpperCase().match(/[A-Z]/g); //ignore any other characters beside a-z.
+  var regAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var cipherAlpha = '';
 
-    if(letters){
-      while (i < letters.length && newAlpha.length !== 26) {
-        if(newAlpha.indexOf(letters[i]) < 0) {
-          newAlpha += letters[i];
-          regAlpha = regAlpha.replace(letters[i], '');
-        }
-        i++;
+  if(letters){
+    var i = 0;
+    while (i < letters.length && cipherAlpha.length !== 26) {
+      if(cipherAlpha.indexOf(letters[i]) < 0) {
+        cipherAlpha += letters[i];
+        regAlpha = regAlpha.replace(letters[i], '');
       }
-      if(newAlpha.length < 26) newAlpha += regAlpha; //Fill rest of new alphabet with remaining letters.
+      i++;
     }
-    else{
-      newAlpha = regAlpha;
-    }
-    return newAlpha;
+  }
+  if(cipherAlpha.length < 26) cipherAlpha += regAlpha; //Fill rest of new alphabet with remaining letters.
+  return cipherAlpha;
 }
 
-export {getNewAlphabet};
+//Creates hashmap linking the old alphabet to the new, for ease of replacing text.
+//  keyword: String of letters used to create new alphabetic to perform substituion.
+//  mode: Integer of one or zero. 0: Encode, 1: Decode.
+//  @Returns:
+//    hash: Maps old to new alphabet
+function getOldToNewAlphabetHash(cipherAlpha, mode=0){
+  var regAlpha = 'abcdefghijklmnopqrstuvwxyz';
+  var hash = {};
+
+  for(var i=0; i<cipherAlpha.length; i++){
+    mode ? hash[cipherAlpha.charAt(i)] = regAlpha.charAt(i) : hash[regAlpha.charAt(i)] = cipherAlpha.charAt(i);
+  }
+  return hash;
+}
+
+export {getCipherAlphabet, getOldToNewAlphabetHash};
 export default Monoalpha;

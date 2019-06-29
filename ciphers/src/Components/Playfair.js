@@ -1,68 +1,60 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container';
 import CipherForm from './CipherForm';
-import Button from 'react-bootstrap/Button';
+import ModeButton from './ModeButton';
 import Output from './Output';
 import PlayfairSquare from './PlayfairSquare';
-import {getNewAlphabet} from './Monoalpha';
+import {getCipherAlphabet} from './Monoalpha';
 
 class Playfair extends Component{
   constructor(props){
     super(props);
 
+    this.modeChange = this.modeChange.bind(this);
+    this.getOutput = this.getOutput.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.keywordChange = this.keywordChange.bind(this);
-    this.state = {mode: 0, keyword: ''};
+    this.state = {
+      mode: 0,
+      keyword: ''
+    };
+  }
+
+  modeChange(e){
+    (this.state.mode === 0) ? this.setState({mode: 1}) : this.setState({mode: 0});
+  }
+
+  getOutput(){
+    var output = '';
+    if(document.getElementById('playfair-input') != null && document.getElementById('playfair-keyword') != null){
+      var input = document.getElementById('playfair-input').value;
+      var keyword = document.getElementById('playfair-keyword').value;
+      if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
+        output = playfairCipher(keyword, input, this.state.mode);
+      }
+    }
+    return output;
   }
 
   handleChange(e, modeChange){
-    var input = document.getElementById('playfair-input').value;
     var keyword = document.getElementById('playfair-keyword').value;
-    var mode = this.state.mode;
-    if(modeChange) {
-      (mode === 0) ? mode = 1 : mode = 0;
-    }
-
-    if(keyword.match(/[a-zA-Z]/) && input.match(/[a-zA-Z]/)) {//Won't do anything unless both have some sort of input. Make sure inputs have alphabetical components.
-      ReactDOM.render(
-        <p>{playfairCipher(keyword, input, mode)}</p>,
-        document.getElementById('playfair-output')
-      );
-    }
-    else{
-      ReactDOM.render(
-        <p/>,
-        document.getElementById('playfair-output')
-      );
-    }
-  }
-
-  handleClick(e){
-    (this.state.mode === 0) ? this.setState({mode: 1}) : this.setState({mode: 0});
-    this.handleChange(e, true);
-  }
-
-  keywordChange(e){
-    this.setState({keyword: e.target.value});
-    this.handleChange();
+    this.setState({keyword: keyword});
   }
 
   render() {
+    const mode = this.state.mode;
+    const keyword = this.state.keyword;
+    const output = this.getOutput();
     return (
       <Container>
         <h1 className='center'>Playfair Cipher</h1>
-        <CipherForm keywordId='playfair-keyword' keywordChangeHandler={this.keywordChange} inputId='playfair-input' textChangeHandler={this.handleChange} />
-        <Button id='playfair-mode' type='button' variant='primary' onClick={this.handleClick}>
-          {(this.state.mode === 0) ? 'Encrypt Mode' : 'Decrypt Mode'}
-        </Button>
+        <CipherForm keywordId='playfair-keyword' keywordChangeHandler={this.handleChange} inputId='playfair-input' textChangeHandler={this.handleChange} />
+        <ModeButton mode={mode} modeChange={this.modeChange} />
         <br/><br/>
         <h3 className='center'>Table Being Used</h3>
         <div id='playfair-table'>
-          <PlayfairSquare square={createSquare(this.state.keyword)} read_only/>
+          <PlayfairSquare square={createSquare(keyword)} read_only/>
         </div>
-        <Output id='playfair-output' />
+        <Output id='playfair-output'  text={output}/>
       </Container>
     );
   }
@@ -75,30 +67,28 @@ class Playfair extends Component{
 //  letterToReplace: Square can only have 25 letters, so one must be replaced. j is usually replaced by i.
 //  replacement: letter that will be used as replacement.
 //  @Returns:
-//    newText: Given text that has been substituted based on the keyword given.
+//    output: Given text that has been substituted based on the keyword given.
 function playfairCipher(keyword, text, mode=0, letterToReplace='j', replacement='i'){
+  var output = '';
   var square = createSquare(keyword);
-  var newText = '';
   var hash = createHash(square);
-  var rowHash = hash.row;
-  var colHash = hash.col;
-  var letters = text.toLowerCase().match(/[a-z]/g); //Need to replace all letterToReplace with replacement.
+  var letters = text.toLowerCase().match(/[a-z]/g);
   if(mode === 0) letters = formatText(letters); //Reformat text for encryption
   if(letters.length % 2 === 0) { //Has to be even since letters are paired together to encipher/decipher
     for(var i=0; i<letters.length; i+=2){
       //Perform encryption/decryption based on case.
-      if(rowHash[letters[i]] === rowHash[letters[i+1]]){ //Row Case
-        newText += rowCase(square, rowHash[letters[i]], colHash[letters[i]], colHash[letters[i+1]], mode);
+      if(hash.row[letters[i]] === hash.row[letters[i+1]]){ //Row Case
+        output += rowCase(square, hash.row[letters[i]], hash.col[letters[i]], hash.col[letters[i+1]], mode);
       }
-      else if (colHash[letters[i]] === colHash[letters[i+1]]) { // Column case
-        newText += colCase(square, colHash[letters[i]], rowHash[letters[i]], rowHash[letters[i+1]], mode);
+      else if (hash.col[letters[i]] === hash.col[letters[i+1]]) { // Column case
+        output += colCase(square, hash.col[letters[i]], hash.row[letters[i]], hash.row[letters[i+1]], mode);
       }
       else{ //Square case
-        newText += squareCase(square, rowHash[letters[i]], colHash[letters[i]], rowHash[letters[i+1]], colHash[letters[i+1]]);
+        output += squareCase(square, hash.row[letters[i]], hash.col[letters[i]], hash.row[letters[i+1]], hash.col[letters[i+1]]);
       }
     }
   }
-  return newText;
+  return mode ? output : output.toUpperCase();
 }
 
 //Modifies text for playfair
@@ -193,7 +183,7 @@ function createSquare(keyword, letterToReplace='j'){
   var i       // the first-order index in square
     , j       // the second order index in square
     , square = [];
-  keyword = getNewAlphabet(keyword).replace(letterToReplace, ''); // Still needs to replace letter with intended replacement when encrypting
+  keyword = getCipherAlphabet(keyword).toLowerCase().replace(letterToReplace, ''); // Still needs to replace letter with intended replacement when encrypting
   for(i=0; i<5;i++){
     square[i] = [];
     for(j=0; j<5;j++){

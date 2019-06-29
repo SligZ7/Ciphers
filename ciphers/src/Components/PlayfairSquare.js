@@ -10,7 +10,7 @@ class PlayfairSquare extends Component{
   }
 
   handleCellChange(e){
-    //Maybe?
+    //TO DO
   }
 
   render() {
@@ -27,6 +27,9 @@ class PlayfairSquare extends Component{
       );
   }
 }
+
+
+
 
 //Helper Function for filling in the table
 //  square: Playfair square being used. Multidimensional array.
