@@ -10,6 +10,22 @@ class Tools extends Component{
     return (
       <Container>
         <h1 className='center'>Tools</h1>
+        <p>
+        These are tools that can help when attempting to decrypt a message.
+        </p>
+        <h5>Frequency Analysis</h5>
+        <p>
+        Frequency analysis will provide the frequencies of a letter's appearance
+        and the frequencies of the digraphs(two letter combinations) and trigraphs
+        (three letter combinations).
+        </p>
+        <h5>Index Of Coincidence</h5>
+        <p>
+        Index of coincidence is a technique used for cryptanalzing a
+        Vigenere cipher. You can learn more about it
+        <a link='https://en.wikipedia.org/wiki/Index_of_coincidence'>here</a>.
+        The expected Index of coincidence of english is 0.0667.
+        </p>
         <Accordion>
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="0">

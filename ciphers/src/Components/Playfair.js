@@ -47,6 +47,28 @@ class Playfair extends Component{
     return (
       <Container>
         <h1 className='center'>Playfair Cipher</h1>
+        <h5>About</h5>
+        <p>
+        A Playfair cipher is digraph substitution cipher that uses a square created from a keyword.
+        </p>
+        <p>
+        The square is created by removing duplicates after a letter first appears and then filling in a
+        5x5 square left to right, top to bottom. Similar to monoalphabetic substituion any unused letters follow
+        after in the order they normally appear. Typically J is removed and replaced by I.
+        </p>
+        <p>
+        When encrypting, the text must be grouped into digraphs(group of two characters), digraphs may not
+        contain two of the same letters and a filler must be inserted, and if the text is uneven after this another
+        filler is needed at the end. When encrypting a digraph there are rules to follow to get the encrpyted characters.
+        Based on the square:
+        <ol>
+        <li>When not in the same row or column, slide to the left/right to other characters column.</li>
+        <li>When both are in the same row. Go to the right once.</li>
+        <li>When both are in the same column. Go down one.</li>
+        </ol>
+        Decrypting is very similar except you go left when in the same row, and go up when in the same column.
+        </p>
+        <h5>Encrypting/Decrypting</h5>
         <CipherForm keywordId='playfair-keyword' keywordChangeHandler={this.handleChange} inputId='playfair-input' textChangeHandler={this.handleChange} />
         <ModeButton mode={mode} modeChange={this.modeChange} />
         <br/><br/>

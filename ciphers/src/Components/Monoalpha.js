@@ -43,6 +43,22 @@ class Monoalpha extends Component{
     return (
       <Container>
         <h1 className='center'>Monoalphabetic Cipher</h1>
+        <h5>About</h5>
+        <p>
+        A monoalphabetic cipher is a substituion cipher. It is done by creating a cipher alphabet
+        based on a keyword.
+        </p>
+        <p>
+        This cipher alphabet is created by removing any duplicates after the
+        first appearance of a letter and adding all other letters not included in the keyword to the end.
+        For example, If the keyword was "Cryptology", the resulting cipher alphabet would be "CRYPTOLGABDEFHJKMNPQSUVWXZ".
+        </p>
+        <p>
+        When encrpyting/decrypting we substitute the original letter with the corresponding alphabet.
+        For example, using the same keyword as before, "They've caught on!" would be encrpyted as "QGTXUTYCSLGQIH", while
+        "SHPTMNQIIP" would be decrypted as "understood".
+        </p>
+        <h5>Encrypting/Decrypting</h5>
         <CipherForm keywordId='monoalpha-keyword' keywordChangeHandler={this.handleChange} inputId='monoalpha-input' textChangeHandler={this.handleChange} />
         <ModeButton mode={mode} modeChange={this.modeChange} />
         <br/><br/>
@@ -94,7 +110,7 @@ function getCipherAlphabet(keyword){
 
 //Creates hashmap linking the old alphabet to the new, for ease of replacing text.
 //  keyword: String of letters used to create new alphabetic to perform substituion.
-//  mode: Integer of one or zero. 0: Encode, 1: Decode.
+//  mode: Integer of one or zero. 0: Encrypt, 1: Decrypt.
 //  @Returns:
 //    hash: Maps old to new alphabet
 function getOldToNewAlphabetHash(cipherAlpha, mode=0){

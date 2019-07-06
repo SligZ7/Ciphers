@@ -28,7 +28,7 @@ class IOC extends Component{
     iocs.forEach((ioc, index) =>
       iocDiffs[index] = Math.abs(0.0667 - ioc)
     );
-    if(iocDiffs) sortedLengths Object.keys(iocDiffs).sort(function(a,b){ return iocDiffs[a] - iocDiffs[b] }));
+    if(iocDiffs) sortedLengths = Object.keys(iocDiffs).sort(function(a,b){ return iocDiffs[a] - iocDiffs[b] });
 
     const output = this.state.output.map((ioc, length) =>
       <ListGroup.Item>Length:{length + 1}  IoC: {ioc}  Difference: ±{iocDiffs[length]}</ListGroup.Item>

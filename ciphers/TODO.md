@@ -1,3 +1,3 @@
 ## TO DO
 
--Add HomePage and details
+-Fix horizontal graph display

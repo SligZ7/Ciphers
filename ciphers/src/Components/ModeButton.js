@@ -14,7 +14,7 @@ class ModeButton extends Component{
   render() {
     return (
         <Button type='button' variant='primary' onClick={this.handleClick}>
-          {(this.props.mode === 0) ? 'Encoding' : 'Decoding'}
+          {(this.props.mode === 0) ? 'Encryting' : 'Decrypting'}
         </Button>
     );
   }
