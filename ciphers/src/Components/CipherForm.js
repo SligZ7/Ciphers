@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 
-class CipherForm extends Component{
+class CipherForm extends Component {
   render() {
     return (
       <Form>
@@ -20,7 +20,7 @@ class CipherForm extends Component{
           </Form.Text>
         </Form.Group>
       </Form>
-      );
+    );
   }
 }
 

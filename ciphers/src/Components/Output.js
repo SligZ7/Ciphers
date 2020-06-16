@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import React, {Component} from 'react';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
-class Output extends Component{
+class Output extends Component {
   render() {
     return (
       <Jumbotron>
@@ -14,7 +14,7 @@ class Output extends Component{
           }
         </div>
       </Jumbotron>
-      );
+    );
   }
 }
 

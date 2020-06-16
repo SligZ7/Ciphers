@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Container from 'react-bootstrap/Container';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import FrequencyAnalysis from './FrequencyAnalysis';
 import IOC from './IOC';
 
-class Tools extends Component{
+class Tools extends Component {
   render() {
     return (
       <Container>
@@ -23,7 +23,7 @@ class Tools extends Component{
         <p>
         Index of coincidence is a technique used for cryptanalzing a
         Vigenere cipher. You can learn more about it
-        <a link='https://en.wikipedia.org/wiki/Index_of_coincidence'>here</a>.
+          <a link='https://en.wikipedia.org/wiki/Index_of_coincidence'>here</a>.
         The expected Index of coincidence of english is 0.0667.
         </p>
         <Accordion>
@@ -45,7 +45,7 @@ class Tools extends Component{
           </Card>
         </Accordion>
       </Container>
-      );
+    );
   }
 }
 

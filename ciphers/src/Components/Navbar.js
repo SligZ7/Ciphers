@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Home from './Home';
@@ -8,7 +8,7 @@ import Vigenere from './Vigenere';
 import Playfair from './Playfair';
 import Tools from './Tools';
 
-class Navbar extends Component{
+class Navbar extends Component {
   render() {
     return (
       <div>
@@ -33,7 +33,7 @@ class Navbar extends Component{
           </Tab>
         </Tabs>
       </div>
-      );
+    );
   }
 }
 

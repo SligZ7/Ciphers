@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Container from 'react-bootstrap/Container';
 
-class Home extends Component{
+class Home extends Component {
   render() {
     return (
       <Container>
@@ -26,7 +26,7 @@ class Home extends Component{
         by Simon Singh is an excellent resource to learn about Cryptography and its history.
         </p>
       </Container>
-      );
+    );
   }
 }
 

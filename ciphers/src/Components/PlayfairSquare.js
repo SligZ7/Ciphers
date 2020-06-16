@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/Form'
+import React, {Component} from 'react';
+import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
 
-class PlayfairSquare extends Component{
-  constructor(props){
+class PlayfairSquare extends Component {
+  constructor(props) {
     super(props);
 
     this.handleCellChange = this.handleCellChange.bind(this);
   }
 
-  handleCellChange(e){
-    //TO DO
+  handleCellChange(e) {
+    // TO DO
   }
 
   render() {
@@ -24,19 +24,16 @@ class PlayfairSquare extends Component{
           {createTableRow(this.props.square, 4, this.props.readOnly)}
         </tbody>
       </Table>
-      );
+    );
   }
 }
 
-
-
-
-//Helper Function for filling in the table
+// Helper Function for filling in the table
 //  square: Playfair square being used. Multidimensional array.
 //  row: row number to display. Integer.
 //  readOnly: Whether cell can be modified or not.
-function createTableRow(square, row, readOnly){
-  return(
+function createTableRow(square, row, readOnly) {
+  return (
     <tr key={'playfair-' + row}>
       <td><Form.Control as='input' size='sm' className='center' plaintext={readOnly} readOnly={readOnly} value={square[row][0]}/></td>
       <td><Form.Control as='input' size='sm' className='center' plaintext={readOnly} readOnly={readOnly} value={square[row][1]}/></td>
