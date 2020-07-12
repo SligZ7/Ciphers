@@ -1,4 +1,4 @@
-import {getCipherAlphabet} from './MonoalphaApi';
+import {getCipherAlphabet} from './Monoalpha';
 
   // Performs Playfair substituion.
   //  keyword: String of letters used to create new alphabets to perform substituion.

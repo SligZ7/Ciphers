@@ -3,9 +3,9 @@ import Container from 'react-bootstrap/Container';
 import CipherForm from './CipherForm';
 import ModeButton from './ModeButton';
 import Output from './Output';
-import {vigenereCipher} from '../Api/VigenereApi';
+import {vigenereCipher} from '../Library/Vigenere';
 
-class Vigenere extends Component {
+class VigenereTab extends Component {
   constructor(props) {
     super(props);
 
@@ -70,4 +70,4 @@ class Vigenere extends Component {
   }
 }
 
-export default Vigenere;
+export default VigenereTab;

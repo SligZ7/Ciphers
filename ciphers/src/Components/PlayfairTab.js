@@ -4,9 +4,9 @@ import CipherForm from './CipherForm';
 import ModeButton from './ModeButton';
 import Output from './Output';
 import PlayfairSquare from './PlayfairSquare';
-import {playfairCipher, createSquare} from '../Api/PlayfairApi';
+import {playfairCipher, createSquare} from '../Library/Playfair';
 
-class Playfair extends Component {
+class PlayfairTab extends Component {
   constructor(props) {
     super(props);
 
@@ -81,4 +81,4 @@ class Playfair extends Component {
   }
 }
 
-export default Playfair;
+export default PlayfairTab;

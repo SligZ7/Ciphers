@@ -3,9 +3,9 @@ import Output from './Output';
 import Container from 'react-bootstrap/Container';
 import CipherForm from './CipherForm';
 import ModeButton from './ModeButton';
-import {monoalphabeticCipher} from '../Api/MonoalphaApi';
+import {monoalphabeticCipher} from '../Library/Monoalpha';
 
-class Monoalpha extends Component {
+class MonoalphaTab extends Component {
   constructor(props) {
     super(props);
 
@@ -68,4 +68,4 @@ class Monoalpha extends Component {
   }
 }
 
-export default Monoalpha;
+export default MonoalphaTab;

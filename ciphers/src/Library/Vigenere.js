@@ -1,5 +1,5 @@
-import {getOldToNewAlphabetHash} from './MonoalphaApi';
-import {shift} from './CaesarApi';
+import {getOldToNewAlphabetHash} from './Monoalpha';
+import {shift} from './Caesar';
   //Performs Vignere substituion.
   //  keyword: String of letters used to create new alphabets to perform substituion.
   //  text: String to encrypt/decrypt.

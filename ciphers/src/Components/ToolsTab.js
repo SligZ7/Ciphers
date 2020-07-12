@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import FrequencyAnalysis from './FrequencyAnalysis';
 import IOC from './IOC';
 
-class Tools extends Component {
+class ToolsTab extends Component {
   render() {
     return (
       <Container>
@@ -48,4 +48,4 @@ class Tools extends Component {
   }
 }
 
-export default Tools;
+export default ToolsTab;

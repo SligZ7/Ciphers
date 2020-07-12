@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Container from 'react-bootstrap/Container';
-import {calculateIndexOfCoincidences} from '../Api/ToolsApi';
+import {calculateIndexOfCoincidences} from '../Library/Tools';
 
 class IOC extends Component {
   constructor(props) {

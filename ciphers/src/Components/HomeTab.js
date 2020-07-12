@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Container from 'react-bootstrap/Container';
 
-class Home extends Component {
+class HomeTab extends Component {
   render() {
     return (
       <Container>
@@ -31,4 +31,4 @@ class Home extends Component {
 }
 
 
-export default Home;
+export default HomeTab;

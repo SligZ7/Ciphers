@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Shifts from './Shifts';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import {getShifts} from '../Api/CaesarApi';
+import {getShifts} from '../Library/Caesar';
 
-class Caesar extends Component {
+class CaesarTab extends Component {
   constructor(props) {
     super(props);
 
@@ -48,4 +48,4 @@ class Caesar extends Component {
   }
 }
 
-export default Caesar;
+export default CaesarTab;

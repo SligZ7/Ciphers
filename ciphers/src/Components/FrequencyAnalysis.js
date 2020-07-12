@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Monograph from './Monograph';
 import HorizontalFrequencyGraph from './HorizontalFrequencyGraph';
-import {letterFrequencyAnalysis} from '../Api/ToolsApi';
+import {letterFrequencyAnalysis} from '../Library/Tools';
 
 class FrequencyAnalysis extends Component {
   constructor(props) {
