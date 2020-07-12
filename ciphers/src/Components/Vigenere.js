@@ -43,8 +43,7 @@ class Vigenere extends Component {
     const output = this.getOutput(); // Needed to sync with button press
     return (
       <Container>
-        <h1 className='center'>Vigenere Cipher</h1>
-        <h5>About</h5>
+        <h1>Vigenere Cipher</h1>
         <p>
         A Vigenere cipher is polyalphabetic cipher that encorporates shifts of a caesar cipher.
         </p>

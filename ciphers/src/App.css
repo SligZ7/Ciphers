@@ -7,7 +7,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,6 +25,14 @@
   text-align: center;
 }
 
+.tab-content {
+  height: inherit;
+}
+
+.output{
+  height: 10rem;
+}
+
 .playfair-square{
   width: 300px;
 }
@@ -36,11 +44,57 @@
   align-items: center;
 }
 
+footer{
+  position: fixed;
+  left:0;
+  bottom:0;
+  right:0;
+  text-align: center;
+  color: black;
+}
+
+html{
+  height: 100%;
+}
+
+body{
+  min-height: 100%;
+  background-color: #EFEFEF;
+}
+
+div{
+  height: inherit;
+}
+
+div.accordion{
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
 p {
   word-wrap: break-word;
 }
 
+h1 {
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  border-bottom: 2px;
+  border-bottom-style: solid;
+}
+
 h5 {
   border-bottom: 1px;
-border-bottom-style: solid;
+  border-bottom-style: solid;
+}
+
+nav, footer {
+   background-color: #A9A9A9;
+}
+
+.footer-link {
+  color: black;
+}
+
+.nav-item {
+  color: black;
 }

@@ -49,8 +49,8 @@ Information on how to deploy can be found [here](https://facebook.github.io/crea
 
 ## Built With
 
-* [React](https://reactjs.org/) - The app framework used
-* [React Bootstrap](https://react-bootstrap.github.io/) - User interface
+* [React](https://reactjs.org/)
+* [React Bootstrap](https://react-bootstrap.github.io/)
 
 ## Authors
 

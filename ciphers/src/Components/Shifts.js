@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 class Shifts extends Component {
   render() {
     return (
-      <Table responsive='md' size='xl' className='center'>
+      <Table responsive='md' size='xl'>
         <thead>
           <tr>
             <th>Shifted by</th>

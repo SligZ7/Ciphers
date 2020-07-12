@@ -43,8 +43,7 @@ class Monoalpha extends Component {
     const output = this.getOutput(); // Needed to sync with button press
     return (
       <Container>
-        <h1 className='center'>Monoalphabetic Cipher</h1>
-        <h5>About</h5>
+        <h1>Monoalphabetic Cipher</h1>
         <p>
         A monoalphabetic cipher is a substituion cipher. It is done by creating a cipher alphabet
         based on a keyword.

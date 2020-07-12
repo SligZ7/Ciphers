@@ -9,7 +9,7 @@ class Tools extends Component {
   render() {
     return (
       <Container>
-        <h1 className='center'>Tools</h1>
+        <h1>Tools</h1>
         <p>
         These are tools that can help when attempting to decrypt a message.
         </p>
@@ -22,8 +22,7 @@ class Tools extends Component {
         <h5>Index Of Coincidence</h5>
         <p>
         Index of coincidence is a technique used for cryptanalzing a
-        Vigenere cipher. You can learn more about it
-          <a link='https://en.wikipedia.org/wiki/Index_of_coincidence'>here</a>.
+        Vigenere cipher. You can learn more about it&nbsp;<a href='https://en.wikipedia.org/wiki/Index_of_coincidence'>here</a>.
         The expected Index of coincidence of english is 0.0667.
         </p>
         <Accordion>

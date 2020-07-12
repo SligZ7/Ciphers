@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
-import Jumbotron from 'react-bootstrap/Jumbotron';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
 class Output extends Component {
   render() {
     return (
-      <Jumbotron>
+      <Container className='output'>
         <h2 className='center'>Output</h2>
         <div id={this.props.id}>
           {this.props.text &&
-            <p>
-              {this.props.text}
-            </p>
+            <Form.Control as='textarea' rows='2' plaintext value={this.props.text} readOnly />
           }
         </div>
-      </Jumbotron>
+      </Container>
     );
   }
 }

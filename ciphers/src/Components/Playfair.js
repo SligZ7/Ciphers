@@ -46,8 +46,7 @@ class Playfair extends Component {
     const output = this.getOutput();
     return (
       <Container>
-        <h1 className='center'>Playfair Cipher</h1>
-        <h5>About</h5>
+        <h1>Playfair Cipher</h1>
         <p>
         A Playfair cipher is digraph substitution cipher that uses a square created from a keyword.
         </p>
