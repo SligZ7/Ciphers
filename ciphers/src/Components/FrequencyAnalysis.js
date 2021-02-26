@@ -1,53 +1,46 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Monograph from './Monograph';
 import HorizontalFrequencyGraph from './HorizontalFrequencyGraph';
-import {letterFrequencyAnalysis} from '../Library/Tools';
+import { letterFrequencyAnalysis } from '../Library/Tools';
 
-class FrequencyAnalysis extends Component {
-  constructor(props) {
-    super(props);
+function FrequencyAnalysis() {
+  const [output, setOutput] = useState({});
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {output: {}};
-  }
-
-  handleSubmit() {
+  const handleSubmit = () => {
     const letterFreqs = letterFrequencyAnalysis(document.getElementById('freq-input').value);
-    this.setState({output: letterFreqs});
+    setOutput(letterFreqs);
   }
 
-  render() {
-    const monograms = this.state.output.monograms;
-    const digrams = this.state.output.digrams;
-    const trigrams = this.state.output.trigrams;
-    return (
-      <Container>
-        <Form>
-          <Form.Group controlId='freq-input'>
-            <Form.Label/>
-            <Form.Control as='textarea' rows='3' placeholder='Enter Text'/>
-            <Form.Text className='text-muted'>
-              Any characters that are not alphabetical will be ignored!
+  const monograms = output.monograms;
+  const digrams = output.digrams;
+  const trigrams = output.trigrams;
+  return (
+    <div>
+      <Form>
+        <Form.Group controlId='freq-input'>
+          <Form.Label />
+          <Form.Control as='textarea' rows='3' placeholder='Enter Text' />
+          <Form.Text className='text-muted'>
+            Any characters that are not alphabetical will be ignored!
             </Form.Text>
-          </Form.Group>
-        </Form>
-        <Button type='submit' variant='primary' onClick={this.handleSubmit}>Analyze Text</Button>
-        {monograms &&
-          <Monograph letterFreqs={monograms} />
-        }
-        {digrams &&
-          <HorizontalFrequencyGraph data={digrams} yLabel='Digrams' title='Digraph Frequencies' />
-        }
-        {trigrams &&
-          <HorizontalFrequencyGraph data={trigrams} yLabel='Trigrams' title='Trigraph Frequencies' />
-        }
-      </Container>
-    );
-  }
+        </Form.Group>
+      </Form>
+      <Button type='submit' variant='primary' onClick={handleSubmit}>Analyze Text</Button>
+      {monograms &&
+        <Monograph letterFreqs={monograms} />
+      }
+      {digrams &&
+        <HorizontalFrequencyGraph data={digrams} yLabel='Digrams' title='Digraph Frequencies' />
+      }
+      {trigrams &&
+        <HorizontalFrequencyGraph data={trigrams} yLabel='Trigrams' title='Trigraph Frequencies' />
+      }
+    </div>
+  );
 }
+
 
 
 export default FrequencyAnalysis;

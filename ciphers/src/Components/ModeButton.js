@@ -1,23 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-class ModeButton extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+function ModeButton({ mode, modeChange }) {
+  const handleClick = (e) => {
+    modeChange(e);
   }
 
-  handleClick(e) {
-    this.props.modeChange(e);
-  }
-
-  render() {
-    return (
-      <Button type='button' variant='primary' onClick={this.handleClick}>
-        {(this.props.mode === 0) ? 'Encrypting' : 'Decrypting'}
-      </Button>
-    );
-  }
+  return (
+    <Button type='button' variant='primary' onClick={handleClick}>
+      {(mode === 0) ? 'Encrypting' : 'Decrypting'}
+    </Button>
+  );
 }
 
 export default ModeButton;

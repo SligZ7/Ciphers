@@ -1,20 +1,18 @@
-import React, {Component} from 'react';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+import React from 'react';
 
-class Output extends Component {
-  render() {
-    return (
-      <Container className='output'>
-        <h2 className='center'>Output</h2>
-        <div id={this.props.id}>
-          {this.props.text &&
-            <Form.Control as='textarea' rows='2' plaintext value={this.props.text} readOnly />
-          }
-        </div>
-      </Container>
-    );
-  }
+function Output({ id, text }) {
+  console.log(text)
+  return (
+    <div className='output'>
+      <h2>Output</h2>
+      <div id={id}>
+        {text &&
+          <p>{text}</p>
+        }
+      </div>
+    </div>
+  );
 }
+
 
 export default Output;
