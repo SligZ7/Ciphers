@@ -11,28 +11,26 @@ import ToolsTab from './ToolsTab';
 
 function Navbar() {
   return (
-    <div>
-      <Tabs defaultActiveKey='home' id='tab'>
-        <Tab eventKey='home' title='Home'>
-          <ContentContainer TabContent={<HomeTab />} />
-        </Tab>
-        <Tab eventKey='caesar' title='Caesar'>
-          <ContentContainer TabContent={<CaesarTab />} />
-        </Tab>
-        <Tab eventKey='monoalpha' title='Monoalphabetic'>
-          <ContentContainer TabContent={<MonoalphaTab />} />
-        </Tab>
-        <Tab eventKey='vigenere' title='Vigenere'>
-          <ContentContainer TabContent={<VigenereTab />} />
-        </Tab>
-        <Tab eventKey='playfair' title='Playfair'>
-          <ContentContainer TabContent={<PlayfairTab />} />
-        </Tab>
-        <Tab eventKey='tools' title='Tools'>
-          <ContentContainer TabContent={<ToolsTab />} />
-        </Tab>
-      </Tabs>
-    </div>
+    <Tabs defaultActiveKey='home' id='tab'>
+      <Tab eventKey='home' title='Home'>
+        <ContentContainer TabContent={<HomeTab />} />
+      </Tab>
+      <Tab eventKey='caesar' title='Caesar'>
+        <ContentContainer TabContent={<CaesarTab />} />
+      </Tab>
+      <Tab eventKey='monoalpha' title='Monoalphabetic'>
+        <ContentContainer TabContent={<MonoalphaTab />} />
+      </Tab>
+      <Tab eventKey='vigenere' title='Vigenere'>
+        <ContentContainer TabContent={<VigenereTab />} />
+      </Tab>
+      <Tab eventKey='playfair' title='Playfair'>
+        <ContentContainer TabContent={<PlayfairTab />} />
+      </Tab>
+      <Tab eventKey='tools' title='Tools'>
+        <ContentContainer TabContent={<ToolsTab />} />
+      </Tab>
+    </Tabs>
   );
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 
 function ModeButton({ mode, modeChange }) {
   const handleClick = (e) => {
@@ -7,9 +6,9 @@ function ModeButton({ mode, modeChange }) {
   }
 
   return (
-    <Button type='button' variant='primary' onClick={handleClick}>
+    <button type='button' onClick={handleClick}>
       {(mode === 0) ? 'Encrypting' : 'Decrypting'}
-    </Button>
+    </button>
   );
 }
 
